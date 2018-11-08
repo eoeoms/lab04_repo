@@ -4,41 +4,94 @@
     <title>Persona &#35;1</title>
     <meta charset="utf-8"/>
     <style>
+      #wrapper {
+        margin: 0 auto;
+        width: 1000px;
+      }
+      #main {
+        float: left;
+        width: 300px;
+      }
+      img {
+        margin: 0 auto;
+        display: block;
+        padding-top: 40px;
+      }
+      h1 {
+        text-align: center;
+      }
+      p {
+        text-align: center;
+      }
+      #aside {
+        float: left;
+        width: 600px;
+        padding-left: 100px;
+      }
       .sublist {
         margin-left: 40px;
         list-style-type: circle;
       }
+      header {
+	      background-color: white;
+        text-align: center;
+        padding: 10px;
+        border-bottom: 2px solid black;
+      }
+      header a {
+        display: inline-block;
+        text-decoration: none;
+        background-color: white;
+        color: black;
+        border: 2px solid green;
+        padding: 10px 20px;
+        width: 60px;
+        margin: 0 10px;
+        font-family: sans-serif;
+      }
+      header a:hover, header a:active {
+        background-color: green;
+        color: white;
+      }
     </style>
   </head>
   <body>
-    <a href="index.html">Home</a>
+    <header>
+      <a href="index.html">Home</a>
+    </header>
     <br/>
-    <img src="http://surgery.med.miami.edu/images/sized/documents/Cynthia_Smith-0017-edit-2-175x263.jpg">
-    <h1>Cynthia Smith</h1>
-    <h2>About:</h2>
-    <ul>
-      <li>Middle school english teacher</li>
-      <li>38 years old</li>
-      <li>Have two kids: 7 years old girl, 6 years old boy</li>
-      <li>Owns a desktop and a school supplied laptop</li>
-      <li>Receives many emails</li>
-      <li>Drives to work</li>
-      <li>Spends a decent amount of time marking</li>
-      <li>Sleeps late, gets up early</li>
-      <li>Careful, friendly, organized, family oriented, caring</li>
-    </ul>
-    <h2>Touchpoints:</h2>
-    <ul>
-      <li>Many accounts</li>
-      <li class="sublist">Workplace related accounts(emails, access to school system, etc.)</li>
-      <li class="sublist">Health insurance, benefits</li>
-      <li class="sublist">Kids' accounts</li>
-      <li class="sublist">Online banking accounts</li>
-      <li class="sublist">Union login informaation</li>
-      <li>Has high concerns about security</li>
-      <li>Not very computer literate</li>
-      <li>Busy with taking care of children and working at the same time</li>
-      <li class="sublist">Doesn't want to go through the hassle of remembering all the passwords for each account</li>
-    </ul>
+    <div id="wrapper">
+      <div id="main">
+        <img src="http://surgery.med.miami.edu/images/sized/documents/Cynthia_Smith-0017-edit-2-175x263.jpg">
+        <h1>Cynthia Smith</h1>
+        <p>Middle school English teacher</p>
+        <p>38 years old</p>
+      </div>
+      <div id="aside">
+        <h2>About:</h2>
+        <ul>
+          <li>Have two kids: 7 years old girl, 6 years old boy</li>
+          <li>Owns a desktop and a school supplied laptop</li>
+          <li>Receives many emails</li>
+          <li>Drives to work</li>
+          <li>Spends a decent amount of time marking</li>
+          <li>Sleeps late, gets up early</li>
+          <li>Careful, friendly, organized, family oriented, caring</li>
+        </ul>
+        <h2>Touchpoints:</h2>
+        <ul>
+          <li>Many accounts</li>
+          <li class="sublist">Workplace related accounts(emails, access to school system, etc.)</li>
+          <li class="sublist">Health insurance, benefits</li>
+          <li class="sublist">Kids' accounts</li>
+          <li class="sublist">Online banking accounts</li>
+          <li class="sublist">Union login information</li>
+          <li>Has high concerns about security</li>
+          <li>Not very computer literate</li>
+          <li>Busy with taking care of children and working at the same time</li>
+          <li class="sublist">Doesn't want to go through the hassle of remembering all the passwords for each account</li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>
