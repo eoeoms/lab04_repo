@@ -3,10 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>SafeStore</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+	  body {
+	    background-color: rgba(4, 40, 68, 0.85);
+	  }
       #wrapper {
         width: 870px;
         margin: 0 auto;
+		margin-top: 30px;
         position: relative;
       }
       h1 {
@@ -19,7 +24,7 @@
         top: 20px;
         left: 100px;
       }
-      #addNewItemIcon {
+      #addNewIcon {
         float: right;
         position: absolute;
         top: 15px;
@@ -27,11 +32,14 @@
       }
       #tableContainer {
         width: 800px;
-        height: 500px;
-        margin: 0 auto;
+        height: 70%;
+        margin: 50px auto;
         clear: both;
         border: 2px solid #dddddd;
         position: relative;
+		background-color: white;
+		border-radius: 5px;
+		overflow: hidden;
       }
       table {
         font-family: arial, sans-serif;
@@ -68,6 +76,7 @@
       #detailsBar span {
         line-height: 50px;
         padding-left: 20px;
+		font-family: sans-serif;
       }
       #detailsBar img {
         margin: 10px 30px;
@@ -79,47 +88,95 @@
         position: absolute;
         bottom: 0;
         background-color: #eeeeee;
+		font-family: sans-serif;
+      }
+      #addNewItemModal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 150px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0,0,0,0.4);
+      }
+      #addNewItemForm {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 50px 30px;
+        border: 1px solid #888;
+        border-radius: 10px;
+        width: 400px;
+        filter: drop-shadow(#101010 0 0 5px);
+        position: relative;
+      }
+      #closeBtn {
+        color: #aaaaaa;
+        font-size: 28px;
+        font-weight: bold;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+      }
+      #closeBtn:hover {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      form {
+        margin: auto;
+        width: 80%;
+        font-family: sans-serif;
+      }
+      form > input {
+        width: 100%
+      }
+      #submitBtn {
+        position: absolute;
+        right: 70px;
+        bottom: 15px;
       }
     </style>
   </head>
   <body>
     <div id="wrapper">
-      
 	  <h1>SafeStore</h1>
 	  <input type="text" id="searchBar" placeholder="Search">
-	  <img src="https://dummyimage.com/30x30/000/fff" id="addNewItemIcon" onclick="addNewItem()"/>
+	  <img src="https://dummyimage.com/30x30/000/fff" id="addNewIcon"/>
       <div id="tableContainer">
         <table id="storedWebsites">
           <tr>
-	          <td class="address">id.bcit.ca</td>
-	          <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
-	          <td class="removeIcon"><img src="https://dummyimage.com/20x20/000/fff"/></td>
+	        <td class="address">id.bcit.ca</td>
+	        <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
+	        <td class="removeIcon"><img src="https://dummyimage.com/20x20/000/fff"/></td>
   	      </tr>
-	        <tr>
-	          <td class="address">my.bcit.ca</td>
-	          <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
-	          <td class="removeIcon"><img src="https://dummyimage.com/20x20/000/fff"/></td>
-	        </tr>
-	        <tr>
-	          <td class="address">google.com</td>
-	          <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
-	          <td class="removeIcon"><img src="https://dummyimage.com/20x20/000/fff"/></td>
-	        </tr>
-	        <tr>
-	          <td class="address">facebook.com</td>
-	          <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
-	          <td class="removeIcon"><img src="https://dummyimage.com/20x20/000/fff"/></td>
-	        </tr>
-	        <tr>
-	          <td class="address">github.com</td>
-	          <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
-	          <td class="removeIcon"><img src="https://dummyimage.com/20x20/000/fff"/></td>
-	        </tr>
+	      <tr>
+	        <td class="address">my.bcit.ca</td>
+	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
+	        <td class="removeIcon"><img src="https://dummyimage.com/20x20/000/fff"/></td>
+	      </tr>
+	      <tr>
+	        <td class="address">google.com</td>
+	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
+	        <td class="removeIcon"><img src="https://dummyimage.com/20x20/000/fff"/></td>
+	      </tr>
+	      <tr>
+	        <td class="address">facebook.com</td>
+	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
+	        <td class="removeIcon"><img src="https://dummyimage.com/20x20/000/fff"/></td>
+	      </tr>
+	      <tr>
+	        <td class="address">github.com</td>
+	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
+	        <td class="removeIcon"><img src="https://dummyimage.com/20x20/000/fff"/></td>
+	      </tr>
         </table>
-		    <div id="detailsBar">
-		      <span>Details</span>
-		      <img src="https://dummyimage.com/30x30/000/fff" style="float:right"/>
-		    </div>
+		<div id="detailsBar">
+		  <span>Details</span>
+		  <img src="https://dummyimage.com/30x30/000/fff" style="float:right"/>
+		</div>
         <div id="detailsPanel">
           <p>These accounts have the same passwords.</p>
           <ul>
@@ -130,24 +187,45 @@
         </div>
       </div>
     </div>
+	<div id="addNewItemModal">
+	  <div id="addNewItemForm">
+	    <span id="closeBtn">&times;</span>
+		<form>
+		  Website Address:<br/>
+		  <input type="text" id="addNewAddress"/><br/><br/>
+		  Username:<br/>
+		  <input type="text" id="addNewUsername"/><br/><br/>
+		  Password:<br/>
+		  <input type="password" id="addNewPwd"/><br/><br/>
+		  Confirm Password:<br/>
+		  <input type="password" id="addNewConfirm"/>
+		  <button type="submit" id="submitBtn">Next</button>
+		</form>
+	  </div>
+	</div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
-      $(".removeIcon").click(function(){
-          $(this).parent().remove();
-      });
-      function addNewItem() {
-	        alert("Not ready yet.");
-	    }
-      $("#detailsBar > img").click(function(){
-          if ($("#detailsBar").css("bottom") == "-2px") {
-              $("#detailsBar").animate({bottom: "298px"}, 300);
-              $("#detailsPanel").slideDown(300);
-          }
-          else if ($("#detailsBar").css("bottom") == "298px") {
-              $("#detailsBar").animate({bottom: "-2px"}, 300);
-              $("#detailsPanel").slideUp(300);
-          }
-      });
+        $(".removeIcon").click(function(){
+            var item = $(this).parent().children("td.address").text();
+            if (confirm("Would you like to remove the stored password for \"" + item + "\"?"))
+				$(this).parent().remove();
+        });
+        $("#addNewIcon").click(function() {
+		    $("#addNewItemModal").css("display", "block");
+		});
+        $("#closeBtn").click(function() {
+			$("#addNewItemModal").css("display", "none");
+		});
+        $("#detailsBar > img").click(function(){
+            if ($("#detailsBar").css("bottom") == "-2px") {
+                $("#detailsBar").animate({bottom: "298px"}, 300);
+                $("#detailsPanel").slideDown(300);
+            }
+            else if ($("#detailsBar").css("bottom") == "298px") {
+                $("#detailsBar").animate({bottom: "-2px"}, 300);
+                $("#detailsPanel").slideUp(300);
+            }
+        });
 	</script>
   </body>
 </html>
