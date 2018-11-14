@@ -23,6 +23,7 @@
 
         h1 {
             text-align: center;
+			font-size: 50pt;
         }
 
         input.login {
@@ -42,6 +43,7 @@
           width: 40%;
           margin: auto;
           display: block;
+		  font-size: 15pt;
         }
 
         .secondary {
@@ -58,12 +60,18 @@
             float: right;
             text-decoration: none;
             color: white;
-            margin-right: 5px;
+            margin-right: 40px;
+			margin-top: 15px;
+			font-size: 15pt;
         }
 
         a:hover {
             color: black;
         }
+		#form input {
+		    padding-left: 10px;
+			font-size: 14pt;
+		}
     </style>
     <body>
         <div class="register"><h3><a class="secondary" href="UnderConstruction.html">Register</a></h3></div>
@@ -72,31 +80,30 @@
         <div class = "Header">
           <h1>SafeStore</h1>
         </div>
-            
-        <form>
-          <div class="container">
-            
-            <!--Username-->
-            <input class="login" type="text" placeholder="Username" name="uname" required>
-            <br>
-            <!--Password-->
-            <input class="login" type="password" placeholder="Enter Password" name="psw" required>
-            
-            <div class="container">
-
-              <button type="submit">Login</button>
-              <br>
-
-              <div class="secondary"></div>
-                <span class="secondary"><a class ="secondary" href="#">Forgot password?</a></span>
-              </div>
-                
-            </div>
-          </div>
-            
-
-            </div>
-          </form>
+        <div id="form">    
+           <form>
+             <div class="container">
+               
+               <!--Username-->
+               <input class="login" type="text" placeholder="Username" name="uname" required>
+               <br>
+               <!--Password-->
+               <input class="login" type="password" placeholder="Enter Password" name="psw" required>
+               <br>
+		   	
+               <div class="container">
+           
+                 <button type="submit">Login</button>
+                 <br>
+           
+                 <div class="secondary"></div>
+                   <span class="secondary"><a class ="secondary" href="#">Forgot password?</a></span>
+                 </div>
+                   
+               </div>
+               
+             </form>
+		</div>
 
     </body>
 
