@@ -78,6 +78,7 @@
         position: absolute;
         bottom: -2px;
         background-color: white;
+		cursor: pointer;
       }
       #detailsBar span {
         line-height: 50px;
@@ -222,7 +223,7 @@
       $("#closeBtn").click(function() {
 		      $("#addNewItemModal").css("display", "none");
 		  });
-      $("#detailsBar > img").click(function(){
+      $("#detailsBar").click(function(){
           if ($("#detailsBar").css("bottom") == "-2px") {
               $("#detailsBar").animate({bottom: "298px"}, 300);
               $("#detailsPanel").slideDown(300);
