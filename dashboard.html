@@ -3,43 +3,49 @@
   <head>
     <meta charset="utf-8">
     <title>SafeStore</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-	  body {
-	    background-color: rgba(4, 40, 68, 0.85);
-	  }
+      @font-face{
+        font-family: Caviar;
+        src: url('./Fonts/CaviarDreams_Bold.ttf')
+      }
+	    body {
+	      background-color: rgba(4, 40, 68, 0.85);
+	    }
       #wrapper {
         width: 870px;
         margin: 0 auto;
-		margin-top: 30px;
+        margin-top: 30px;
         position: relative;
       }
       h1 {
         text-align: center;
         margin-top: 20px;
         margin-bottom: 20px;
+        font-family: Caviar;
+        color: white;
       }
       #searchBar {
         position: absolute;
-        top: 20px;
-        left: 100px;
+        top: 30px;
+        left: 70px;
       }
       #addNewIcon {
         float: right;
         position: absolute;
-        top: 15px;
-        left: 700px;
+        top: 25px;
+        right: 100px;
       }
       #tableContainer {
         width: 800px;
         height: 70%;
-        margin: 50px auto;
+        margin: 40px auto;
         clear: both;
         border: 2px solid #dddddd;
         position: relative;
-		background-color: white;
-		border-radius: 5px;
-		overflow: hidden;
+		    background-color: white;
+		    border-radius: 5px;
+		    overflow: hidden;
       }
       table {
         font-family: arial, sans-serif;
@@ -76,7 +82,7 @@
       #detailsBar span {
         line-height: 50px;
         padding-left: 20px;
-		font-family: sans-serif;
+		    font-family: sans-serif;
       }
       #detailsBar img {
         margin: 10px 30px;
@@ -88,7 +94,7 @@
         position: absolute;
         bottom: 0;
         background-color: #eeeeee;
-		font-family: sans-serif;
+        font-family: sans-serif;
       }
       #addNewItemModal {
         display: none;
@@ -205,27 +211,26 @@
 	</div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
-        $(".removeIcon").click(function(){
-            var item = $(this).parent().children("td.address").text();
-            if (confirm("Would you like to remove the stored password for \"" + item + "\"?"))
-				$(this).parent().remove();
-        });
-        $("#addNewIcon").click(function() {
-		    $("#addNewItemModal").css("display", "block");
-		});
-        $("#closeBtn").click(function() {
-			$("#addNewItemModal").css("display", "none");
-		});
-        $("#detailsBar > img").click(function(){
-            if ($("#detailsBar").css("bottom") == "-2px") {
-                $("#detailsBar").animate({bottom: "298px"}, 300);
-                $("#detailsPanel").slideDown(300);
-            }
-            else if ($("#detailsBar").css("bottom") == "298px") {
-                $("#detailsBar").animate({bottom: "-2px"}, 300);
-                $("#detailsPanel").slideUp(300);
-            }
-        });
+      $(".removeIcon").click(function(){
+          var item = $(this).parent().children("td.address").text();
+          if (confirm("Would you like to remove the stored password for \"" + item + "\"?"))
+				  $(this).parent().remove();
+      });
+      $("#addNewIcon").click(function() {
+		      $("#addNewItemModal").css("display", "block");
+		  });
+      $("#closeBtn").click(function() {
+		      $("#addNewItemModal").css("display", "none");
+		  });
+      $("#detailsBar > img").click(function(){
+          if ($("#detailsBar").css("bottom") == "-2px") {
+              $("#detailsBar").animate({bottom: "298px"}, 300);
+              $("#detailsPanel").slideDown(300);
+          } else if ($("#detailsBar").css("bottom") == "298px") {
+              $("#detailsBar").animate({bottom: "-2px"}, 300);
+              $("#detailsPanel").slideUp(300);
+          }
+      });
 	</script>
   </body>
 </html>
