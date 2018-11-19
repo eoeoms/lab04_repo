@@ -287,12 +287,14 @@
         $("#detailsBar").click(function(){
             if ($("#detailsBar").css("bottom") == "-2px") {
                 $("#detailsBar").animate({bottom: "298px"}, 300);
-                $("#detailsPanel").slideDown(300);
-			    $("#detailsBar i").attr("class", "fas fa-angle-down");
+                $("#detailsPanel").slideDown(300, function() {
+					$("#detailsBar i").attr("class", "fas fa-angle-down");
+				});
             } else if ($("#detailsBar").css("bottom") == "298px") {
                 $("#detailsBar").animate({bottom: "-2px"}, 300);
-                $("#detailsPanel").slideUp(300);
-			    $("#detailsBar i").attr("class", "fas fa-angle-up");
+                $("#detailsPanel").slideUp(300, function() {
+					$("#detailsBar i").attr("class", "fas fa-angle-up");
+				});
             }
         });
 		
