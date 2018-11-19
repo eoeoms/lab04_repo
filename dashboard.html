@@ -26,10 +26,23 @@
         margin-bottom: 20px;
         font-family: Caviar;
         color: white;
+		font-size: 30pt;
       }
+	  #logout {
+	    color: white;
+	    font-family: Caviar;
+	    position: absolute;
+		top: 0;
+		right: 0;
+		font-size: 14pt;
+		cursor: pointer;
+	  }
+	  #logout:hover {
+	    color: #dddddd;
+	  }
       #searchBar {
         position: absolute;
-        top: 30px;
+        top: 60px;
         left: 70px;
 		border-radius: 10px;
 		padding-left: 5px;
@@ -37,7 +50,7 @@
       #addNewIcon {
         float: right;
         position: absolute;
-        top: 20px;
+        top: 50px;
         right: 100px;
 		font-size: 40px;
 		color: white;
@@ -46,7 +59,7 @@
       #tableContainer {
         width: 800px;
         height: 70%;
-        margin: 30px auto;
+        margin: 60px auto;
         clear: both;
         border: 2px solid #dddddd;
         position: relative;
@@ -173,6 +186,7 @@
   <body>
     <div id="wrapper">
 	  <h1>SafeStore</h1>
+	  <span id="logOut">Log out</span>
 	  <input type="text" id="searchBar" placeholder="Search">
 	  <i class="material-icons" id="addNewIcon">add_circle_outline</i>
       <div id="tableContainer">
@@ -281,6 +295,11 @@
 			    $("#detailsBar i").attr("class", "fas fa-angle-up");
             }
         });
+		
+		//LOG OUT
+		$("#logOut").click(function() {
+		    alert("Not ready yet.");
+		});
 		
         //FIREBASE??
         // Get a reference to the database service
