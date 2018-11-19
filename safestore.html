@@ -4,6 +4,31 @@
     <head>
         <meta charset=utf-8>
         <title>SafeStore</title>
+
+        <!--firebase authentication-->
+        <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+        
+        <!--Firebase DataBase-->
+        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+            <script>
+                 // Initialize Firebase
+                var config = {
+                    apiKey: "AIzaSyBIjtMzt9U8DuqFWbyN0E5aLAC-5bLaq_U",
+                    authDomain: "nov01-bbe3f.firebaseapp.com",
+                    databaseURL: "https://nov01-bbe3f.firebaseio.com",
+                    projectId: "nov01-bbe3f",
+                    storageBucket: "nov01-bbe3f.appspot.com",
+                    messagingSenderId: "512486070002"
+                };
+                firebase.initializeApp(config);
+        </script>
+
+        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-database.js"></script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
     </head>
 
     <style>
@@ -105,13 +130,16 @@
              </form>
 		</div>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
+        
         <script>
         /*<![CDATA[*/
         
+
         $(document).ready(function() {
         
+            $
+
             $('button').click(function() {
                 
             });
