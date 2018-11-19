@@ -97,9 +97,40 @@
 		    padding-left: 10px;
 			font-size: 14pt;
 		}
+		#createAccountModal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 150px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0,0,0,0.4);
+      }
+	  #addNewItemForm {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 50px 30px;
+        border: 1px solid #888;
+        border-radius: 10px;
+        width: 400px;
+        filter: drop-shadow(#101010 0 0 5px);
+        position: relative;
+      }
+	  #registerBtn {
+        float: right;
+        position: absolute;
+        top: 15px;
+        right: 40px;
+		font-size: 15px;
+		color: white;
+		cursor: pointer;
+      }
     </style>
     <body>
-        <div class="register"><h3><a class="secondary" href="UnderConstruction.html">Register</a></h3></div>
+        <div class="register"><h3 id="registerBtn">Register</h3></div>
         <br><br><br>
 
         <div class = "Header">
@@ -129,9 +160,26 @@
                
              </form>
 		</div>
+		<div id="createAccountModal">
+	  <div id="addNewItemForm">
+	    <span id="closeBtn">&times;</span>
+		<form>
+		  Email:<br/>
+		  <input type="text" id="addNewAddress"/><br/><br/>
+		  Phone Number:<br/>
+		  <input type="text" id="addNewUsername"/><br/><br/>
+		  Password:<br/>
+		  <input type="password" id="addNewPwd"/><br/><br/>
+		  Confirm Password:<br/>
+		  <input type="password" id="addNewConfirm"/>
+		  <button type="submit" id="submitBtn">Next</button>
+		</form>
+	  </div>
+	</div>
 
 
         
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
         /*<![CDATA[*/
         
@@ -146,6 +194,12 @@
         
 
         }
+		$("#registerBtn").click(function() {
+		      $("#createAccountModal").css("display", "block");
+		  });
+      $("#closeBtn").click(function() {
+		      $("#createAccountModal").css("display", "none");
+		  });
         
         
         /*]]>*/
