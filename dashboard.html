@@ -159,7 +159,23 @@
         bottom: 15px;
       }
     </style>
-  </head>
+
+    <!--Firebase DataBase-->
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyBIjtMzt9U8DuqFWbyN0E5aLAC-5bLaq_U",
+          authDomain: "nov01-bbe3f.firebaseapp.com",
+          databaseURL: "https://nov01-bbe3f.firebaseio.com",
+          projectId: "nov01-bbe3f",
+          storageBucket: "nov01-bbe3f.appspot.com",
+          messagingSenderId: "512486070002"
+        };
+        firebase.initializeApp(config);
+      </script>
+  
+</head>
   <body>
     <div id="wrapper">
 	  <h1>SafeStore</h1>
@@ -228,7 +244,7 @@
       $(".removeIcon i").click(function(){
           var item = $(this).parent().parent().children("td.address").text();
           if (confirm("Would you like to remove the stored password for \"" + item + "\"?"))
-				  $(this).parent().remove();
+				  $(this).parent().parent().remove();
       });
       $("#addNewIcon").click(function() {
 		      $("#addNewItemModal").css("display", "block");
