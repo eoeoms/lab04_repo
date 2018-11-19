@@ -169,27 +169,27 @@
         <table id="storedWebsites">
           <tr>
 	        <td class="address">id.bcit.ca</td>
-	        <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
+	        <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
 	        <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
   	      </tr>
 	      <tr>
 	        <td class="address">my.bcit.ca</td>
-	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
+	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
 	        <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
 	      </tr>
 	      <tr>
 	        <td class="address">google.com</td>
-	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
+	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
 	        <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
 	      </tr>
 	      <tr>
 	        <td class="address">facebook.com</td>
-	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
+	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
 	        <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
 	      </tr>
 	      <tr>
 	        <td class="address">github.com</td>
-	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff"></td>
+	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
 	        <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
 	      </tr>
         </table>
@@ -223,30 +223,36 @@
 		</form>
 	  </div>
 	</div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
-      $(".removeIcon i").click(function(){
-          var item = $(this).parent().parent().children("td.address").text();
-          if (confirm("Would you like to remove the stored password for \"" + item + "\"?"))
-				  $(this).parent().parent().remove();
-      });
-      $("#addNewIcon").click(function() {
-		      $("#addNewItemModal").css("display", "block");
-		  });
-      $("#closeBtn").click(function() {
-		      $("#addNewItemModal").css("display", "none");
-		  });
-      $("#detailsBar").click(function(){
-          if ($("#detailsBar").css("bottom") == "-2px") {
-              $("#detailsBar").animate({bottom: "298px"}, 300);
-              $("#detailsPanel").slideDown(300);
-			  $("#detailsBar i").attr("class", "fas fa-angle-down");
-          } else if ($("#detailsBar").css("bottom") == "298px") {
-              $("#detailsBar").animate({bottom: "-2px"}, 300);
-              $("#detailsPanel").slideUp(300);
-			  $("#detailsBar i").attr("class", "fas fa-angle-up");
-          }
-      });
+		//REMOVE STORE PASSWORD
+        $(".removeIcon i").click(function(){
+            var item = $(this).parent().parent().children("td.address").text();
+            if (confirm("Would you like to remove the stored password for \"" + item + "\"?"))
+		        $(this).parent().parent().remove();
+        });
+		
+		//ADD NEW PASSWORD POP-UP
+        $("#addNewIcon").click(function() {
+		    $("#addNewItemModal").css("display", "block");
+		});
+		//CLOSE POP-UP
+        $("#closeBtn").click(function() {
+		    $("#addNewItemModal").css("display", "none");
+		});
+		
+		//DETAILS BAR SLIDE UP & SLIDE DOWN
+        $("#detailsBar").click(function(){
+            if ($("#detailsBar").css("bottom") == "-2px") {
+                $("#detailsBar").animate({bottom: "298px"}, 300);
+                $("#detailsPanel").slideDown(300);
+			    $("#detailsBar i").attr("class", "fas fa-angle-down");
+            } else if ($("#detailsBar").css("bottom") == "298px") {
+                $("#detailsBar").animate({bottom: "-2px"}, 300);
+                $("#detailsPanel").slideUp(300);
+			    $("#detailsBar i").attr("class", "fas fa-angle-up");
+            }
+        });
 	</script>
   </body>
 </html>
