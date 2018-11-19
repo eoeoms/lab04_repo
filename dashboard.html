@@ -169,10 +169,7 @@
 		font-family: Caviar;
       }
     </style>
-
-    
-  
-</head>
+  </head>
   <body>
     <div id="wrapper">
 	  <h1>SafeStore</h1>
@@ -223,8 +220,8 @@
 	<div id="addNewItemModal">
 	  <div id="addNewItemForm">
 	    <span id="closeBtn">&times;</span>
-    <!--ADD FORM-->
-      <form>
+        <!--ADD FORM-->
+        <form>
 		  Website Address:<br/>
 		  <input type="text" id="addNewAddress"/><br/><br/>
 		  Username:<br/>
@@ -237,65 +234,62 @@
 		</form>
 	  </div>
 	</div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-  <!--Firebase DataBase-->
-  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyBIjtMzt9U8DuqFWbyN0E5aLAC-5bLaq_U",
-      authDomain: "nov01-bbe3f.firebaseapp.com",
-      databaseURL: "https://nov01-bbe3f.firebaseio.com",
-      projectId: "nov01-bbe3f",
-      storageBucket: "nov01-bbe3f.appspot.com",
-      messagingSenderId: "512486070002"
-    };
-    firebase.initializeApp(config);
-  </script>
+    <!--Firebase DataBase-->
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBIjtMzt9U8DuqFWbyN0E5aLAC-5bLaq_U",
+            authDomain: "nov01-bbe3f.firebaseapp.com",
+            databaseURL: "https://nov01-bbe3f.firebaseio.com",
+            projectId: "nov01-bbe3f",
+            storageBucket: "nov01-bbe3f.appspot.com",
+            messagingSenderId: "512486070002"
+        };
+        firebase.initializeApp(config);
+    </script>
 
-	<script>
-    //REMOVE
-      $(".removeIcon i").click(function(){
-          var item = $(this).parent().parent().children("td.address").text();
-          if (confirm("Would you like to remove the stored password for \"" + item + "\"?"))
-				  $(this).parent().parent().remove();
-      });
+    <script>
+        //REMOVE
+        $(".removeIcon i").click(function(){
+            var item = $(this).parent().parent().children("td.address").text();
+            if (confirm("Would you like to remove the stored password for \"" + item + "\"?"))
+		        $(this).parent().parent().remove();
+        });
 
-      //ADD PASSWORD
-      $("#addNewIcon").click(function() {
-		      $("#addNewItemModal").css("display", "block");
-		  });
+        //ADD PASSWORD
+        $("#addNewIcon").click(function() {
+		    $("#addNewItemModal").css("display", "block");
+		});
 
-      //CLOSE ADD MENU
-      $("#closeBtn").click(function() {
-		      $("#addNewItemModal").css("display", "none");
-		  });
+        //CLOSE ADD MENU
+        $("#closeBtn").click(function() {
+		    $("#addNewItemModal").css("display", "none");
+		});
 
-      //DETAILS
-      $("#detailsBar").click(function(){
-          if ($("#detailsBar").css("bottom") == "-2px") {
-              $("#detailsBar").animate({bottom: "298px"}, 300);
-              $("#detailsPanel").slideDown(300);
-			  $("#detailsBar i").attr("class", "fas fa-angle-down");
-          } else if ($("#detailsBar").css("bottom") == "298px") {
-              $("#detailsBar").animate({bottom: "-2px"}, 300);
-              $("#detailsPanel").slideUp(300);
-			  $("#detailsBar i").attr("class", "fas fa-angle-up");
-          }
-      });
-      
+        //DETAILS
+        $("#detailsBar").click(function(){
+            if ($("#detailsBar").css("bottom") == "-2px") {
+                $("#detailsBar").animate({bottom: "298px"}, 300);
+                $("#detailsPanel").slideDown(300);
+			    $("#detailsBar i").attr("class", "fas fa-angle-down");
+            } else if ($("#detailsBar").css("bottom") == "298px") {
+                $("#detailsBar").animate({bottom: "-2px"}, 300);
+                $("#detailsPanel").slideUp(300);
+			    $("#detailsBar i").attr("class", "fas fa-angle-up");
+            }
+        });
+		
+        //FIREBASE??
+        // Get a reference to the database service
+        var database = firebase.database();
 
-
-      
-      //FIREBASE??
-      // Get a reference to the database service
-      var database = firebase.database();
-
-      //  const preObject = document.getElemenyById('object');
-      const dbRefObject = firebase.database().ref().child('object');
-
-      dbRefObject.on('value', snap => console.log(snap.val()));
+        //  const preObject = document.getElemenyById('object');
+        const dbRefObject = firebase.database().ref().child('object');
+		
+        dbRefObject.on('value', snap => console.log(snap.val()));
 	</script>
   </body>
 </html>
