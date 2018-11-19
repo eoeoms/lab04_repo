@@ -228,7 +228,7 @@
       $(".removeIcon i").click(function(){
           var item = $(this).parent().parent().children("td.address").text();
           if (confirm("Would you like to remove the stored password for \"" + item + "\"?"))
-				  $(this).parent().remove();
+				  $(this).parent().parent().remove();
       });
       $("#addNewIcon").click(function() {
 		      $("#addNewItemModal").css("display", "block");
