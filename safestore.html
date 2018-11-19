@@ -112,12 +112,26 @@
 	  #addNewItemForm {
         background-color: #fefefe;
         margin: auto;
-        padding: 50px 30px;
+        padding: 50px 30px 50px 30px;
         border: 1px solid #888;
         border-radius: 10px;
         width: 400px;
         filter: drop-shadow(#101010 0 0 5px);
         position: relative;
+		color: black;
+      }
+	  #closeBtn {
+        color: #aaaaaa;
+        font-size: 36px;
+        font-weight: bold;
+        position: absolute;
+        right: 20px;
+		top: 0;
+      }
+	  #closeBtn:hover {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
       }
 	  #registerBtn {
         float: right;
@@ -127,6 +141,17 @@
 		font-size: 15px;
 		color: white;
 		cursor: pointer;
+      }
+	  #addNewItemForm > form {
+        margin: auto;
+        width: 80%;
+      }
+      #addNewItemForm > form > input {
+        width: 100%
+      }
+      #submitBtn {
+        position: relative;
+        top: 20px;
       }
     </style>
     <body>
@@ -161,21 +186,21 @@
              </form>
 		</div>
 		<div id="createAccountModal">
-	  <div id="addNewItemForm">
-	    <span id="closeBtn">&times;</span>
-		<form>
-		  Email:<br/>
-		  <input type="text" id="addNewAddress"/><br/><br/>
-		  Phone Number:<br/>
-		  <input type="text" id="addNewUsername"/><br/><br/>
-		  Password:<br/>
-		  <input type="password" id="addNewPwd"/><br/><br/>
-		  Confirm Password:<br/>
-		  <input type="password" id="addNewConfirm"/>
-		  <button type="submit" id="submitBtn">Next</button>
-		</form>
-	  </div>
-	</div>
+	      <div id="addNewItemForm">
+	        <span id="closeBtn">&times;</span>
+			<form>
+			  Email:<br/>
+			  <input type="text" id="addNewAddress"/><br/><br/>
+			  Phone Number:<br/>
+			  <input type="text" id="addNewUsername"/><br/><br/>
+			  Password:<br/>
+			  <input type="password" id="addNewPwd"/><br/><br/>
+			  Confirm Password:<br/>
+			  <input type="password" id="addNewConfirm"/>
+			  <button type="submit" id="submitBtn">Next</button>
+			</form>
+	      </div>
+		</div>
 
 
         
@@ -183,17 +208,6 @@
         <script>
         /*<![CDATA[*/
         
-
-        $(document).ready(function() {
-        
-            $
-
-            $('button').click(function() {
-                
-            });
-        
-
-        }
 		$("#registerBtn").click(function() {
 		      $("#createAccountModal").css("display", "block");
 		  });
