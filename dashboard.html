@@ -198,22 +198,22 @@
   	      </tr>
 	      <tr>
 	        <td class="address">my.bcit.ca</td>
-	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
+	        <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
 	        <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
 	      </tr>
 	      <tr>
 	        <td class="address">google.com</td>
-	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
+	        <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
 	        <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
 	      </tr>
 	      <tr>
 	        <td class="address">facebook.com</td>
-	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
+	        <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
 	        <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
 	      </tr>
 	      <tr>
 	        <td class="address">github.com</td>
-	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
+	        <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
 	        <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
 	      </tr>
         </table>
@@ -266,14 +266,14 @@
     </script>
 
     <script>
-        //REMOVE
+        //REMOVE STORED PASSWORD
         $(".removeIcon i").click(function(){
             var item = $(this).parent().parent().children("td.address").text();
             if (confirm("Would you like to remove the stored password for \"" + item + "\"?"))
 		        $(this).parent().parent().remove();
         });
 
-        //ADD PASSWORD
+        //ADD NEW PASSWORD POP-UP
         $("#addNewIcon").click(function() {
 		    $("#addNewItemModal").css("display", "block");
 		});
@@ -281,6 +281,33 @@
         //CLOSE ADD MENU
         $("#closeBtn").click(function() {
 		    $("#addNewItemModal").css("display", "none");
+		});
+		
+		//SUBMIT BUTTON ON ADD MENU
+		$("#submitBtn").click(function() {
+		    $("#addNewItemModal").css("display", "none");
+			ref.once("value").then(function(snapshot) {
+				var password = snapshot.child("Master Account/Website/Password").val();
+				let tr = $("<tr></tr>");
+				$("tbody").append(tr);
+				let td1 = $("<td></td>");
+				td1.text(password);
+				td1.addClass("address");
+				let td2 = $("<td></td>");
+				td2.addClass("strength");
+				td2.text("Strength ");
+				let td3 = $("<td></td>");
+				td3.addClass("removeIcon");
+				let removeIcon = $("<i></i>");
+				removeIcon.addClass("fas fa-trash-alt");
+				tr.append(td1, td2, td3);
+				td3.append(removeIcon);
+				removeIcon.click(function(){
+					var item = $(this).parent().parent().children("td.address").text();
+					if (confirm("Would you like to remove the stored password for \"" + item + "\"?"))
+					$(this).parent().parent().remove();
+				});
+			});
 		});
 
         //DETAILS
