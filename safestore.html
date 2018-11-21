@@ -125,7 +125,7 @@
         background-color: rgba(0,0,0,0.4);
         }
 		
-	  #addNewItemForm {
+	  #registerForm {
         background-color: #fefefe;
         margin: auto;
         padding: 50px 30px 50px 30px;
@@ -163,18 +163,27 @@
 		cursor: pointer;
       }
 	  
-	  #addNewItemForm > form {
+	  #registerForm > form {
         margin: auto;
         width: 80%;
       }
 	  
-      #addNewItemForm > form > input {
+      #registerForm > form > input {
         width: 100%
       }
 	  
       #submitBtn {
         position: relative;
         top: 20px;
+		background-color: #4CAF50;
+        color: white;
+		width: 80px;
+		text-align: center;
+        padding: 10px 25px;
+        cursor: pointer;
+        margin: 0 auto;
+		display: block;
+		font-size: 15pt;
       }
     </style>
     <body>
@@ -209,16 +218,16 @@
              </form>
 		</div>
 		<div id="createAccountModal">
-	      <div id="addNewItemForm">
+	      <div id="registerForm">
 	        <span id="closeBtn">&times;</span>
 			<form>
 			  Email:<br/>
-			  <input type="text" id="addNewAddress"/><br/><br/>
+			  <input type="text" id="newEmail"/><br/><br/>
 			  Password:<br/>
-			  <input type="password" id="addNewPwd"/><br/><br/>
+			  <input type="password" id="newPwd"/><br/><br/>
 			  Confirm Password:<br/>
-			  <input type="password" id="addNewConfirm"/>
-			  <button type="submit" id="submitBtn">Next</button>
+			  <input type="password" id="newConfirm"/><br/>
+			  <span id="submitBtn">Register</span>
 			</form>
 	      </div>
 		</div>
@@ -227,8 +236,6 @@
         
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
-        /*<![CDATA[*/
-        
 		$("#registerBtn").click(function() {
 		      $("#createAccountModal").css("display", "block");
 		  });
@@ -236,20 +243,27 @@
 		      $("#createAccountModal").css("display", "none");
 		  });
         
+		//Register submit
         $("#submitBtn").click(function(){
-            var confirmPassword = document.getElementById("addNewPwd");
-            var comfirm = document.getElementById("addNewConfirm");
-            
+			let email = document.getElementById("newEmail").value;
+            let confirmPassword = document.getElementById("newPwd").value;
+            let confirm = document.getElementById("newConfirm").value;
+			
             if(confirmPassword == confirm){
-                return true;
-                console.log("true");
-            } else {
-                return false;
+				//close pop-up
+				$("#createAccountModal").css("display", "none");
+				
+				//clear fields
+				document.getElementById("newEmail").value = "";
+				document.getElementById("newConfirm").value = "";
+				document.getElementById("newPwd").value = "";
             }
         });
-        
-        /*]]>*/
-
+		
+		/********************************************************
+		 ******************* Work in progress *******************
+		 ********************************************************/
+		
         firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
@@ -261,18 +275,7 @@
         var userEmail = document.getElementById("email_field").value;
         var userPass = document.getElementById("password_field").value;
 
-        function validatePassword(){
-            var confirmPassword = document.getElementById("addNewPwd");
-            var comfirm = document.getElementById("addNewConfirm");
-            
-            if(confirmPassword == confirm){
-                return true;
-                console.log("true");
-            }
-
-        }
-
-        firebase.auth().createUserWithEmailAndPassword(addNewAddress, addNewPwd).catch(function(error) {
+        firebase.auth().createUserWithEmailAndPassword(newEmail, newPwd).catch(function(error) {
         // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
