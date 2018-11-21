@@ -106,10 +106,12 @@
         a:hover {
             color: black;
         }
+		
 		#form input {
 		    padding-left: 10px;
 			font-size: 14pt;
 		}
+		
 		#createAccountModal {
         display: none;
         position: fixed;
@@ -121,7 +123,8 @@
         height: 100%;
         overflow: auto; /* Enable scroll if needed */
         background-color: rgba(0,0,0,0.4);
-      }
+        }
+		
 	  #addNewItemForm {
         background-color: #fefefe;
         margin: auto;
@@ -133,6 +136,7 @@
         position: relative;
 		color: black;
       }
+	  
 	  #closeBtn {
         color: #aaaaaa;
         font-size: 36px;
@@ -141,27 +145,33 @@
         right: 20px;
 		top: 0;
       }
+	  
 	  #closeBtn:hover {
         color: #000;
         text-decoration: none;
         cursor: pointer;
       }
+	  
 	  #registerBtn {
+	    margin: auto;
         float: right;
-        position: absolute;
-        top: 15px;
-        right: 40px;
-		font-size: 15px;
+		text-decoration: none;
+        margin-right: 25px;
+		margin-top: 30px;
+		font-size: 17pt;
 		color: white;
 		cursor: pointer;
       }
+	  
 	  #addNewItemForm > form {
         margin: auto;
         width: 80%;
       }
+	  
       #addNewItemForm > form > input {
         width: 100%
       }
+	  
       #submitBtn {
         position: relative;
         top: 20px;
@@ -204,8 +214,6 @@
 			<form>
 			  Email:<br/>
 			  <input type="text" id="addNewAddress"/><br/><br/>
-			  Phone Number:<br/>
-			  <input type="text" id="addNewUsername"/><br/><br/>
 			  Password:<br/>
 			  <input type="password" id="addNewPwd"/><br/><br/>
 			  Confirm Password:<br/>

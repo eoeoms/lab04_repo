@@ -26,10 +26,23 @@
         margin-bottom: 20px;
         font-family: Caviar;
         color: white;
+		font-size: 30pt;
       }
+	  #logout {
+	    color: white;
+	    font-family: Caviar;
+	    position: absolute;
+		top: 0;
+		right: 0;
+		font-size: 14pt;
+		cursor: pointer;
+	  }
+	  #logout:hover {
+	    color: #dddddd;
+	  }
       #searchBar {
         position: absolute;
-        top: 30px;
+        top: 60px;
         left: 70px;
 		border-radius: 10px;
 		padding-left: 5px;
@@ -37,7 +50,7 @@
       #addNewIcon {
         float: right;
         position: absolute;
-        top: 20px;
+        top: 50px;
         right: 100px;
 		font-size: 40px;
 		color: white;
@@ -46,7 +59,7 @@
       #tableContainer {
         width: 800px;
         height: 70%;
-        margin: 30px auto;
+        margin: 60px auto;
         clear: both;
         border: 2px solid #dddddd;
         position: relative;
@@ -114,7 +127,7 @@
         display: none;
         position: fixed;
         z-index: 1;
-        padding-top: 150px; /* Location of the box */
+        padding-top: 120px; /* Location of the box */
         left: 0;
         top: 0;
         width: 100%;
@@ -131,14 +144,15 @@
         width: 400px;
         filter: drop-shadow(#101010 0 0 5px);
         position: relative;
+        font-family: Caviar;
       }
       #closeBtn {
         color: #aaaaaa;
-        font-size: 28px;
+        font-size: 36px;
         font-weight: bold;
         position: absolute;
         right: 20px;
-        top: 10px;
+        top: 5px;
       }
       #closeBtn:hover {
         color: #000;
@@ -148,24 +162,33 @@
       form {
         margin: auto;
         width: 80%;
-        font-family: sans-serif;
       }
       form > input {
-        width: 100%
+        width: 100%;
+		height: 30px;
+		font-size: 18px;
       }
       #submitBtn {
-        position: absolute;
-        right: 70px;
-        bottom: 15px;
+        position: relative;
+        top: 20px;
+		background-color: #4CAF50;
+        color: white;
+		width: 80px;
+		text-align: center;
+        padding: 10px 25px;
+        border: none;
+        cursor: pointer;
+        margin: 0 auto;
+        display: block;
+		font-size: 15pt;
+		font-family: Caviar;
       }
     </style>
-
-    
-  
-</head>
+  </head>
   <body>
     <div id="wrapper">
 	  <h1>SafeStore</h1>
+	  <span id="logOut">Log out</span>
 	  <input type="text" id="searchBar" placeholder="Search">
 	  <i class="material-icons" id="addNewIcon">add_circle_outline</i>
       <div id="tableContainer">
@@ -177,22 +200,22 @@
   	      </tr>
 	      <tr>
 	        <td class="address">my.bcit.ca</td>
-	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
+	        <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
 	        <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
 	      </tr>
 	      <tr>
 	        <td class="address">google.com</td>
-	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
+	        <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
 	        <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
 	      </tr>
 	      <tr>
 	        <td class="address">facebook.com</td>
-	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
+	        <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
 	        <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
 	      </tr>
 	      <tr>
 	        <td class="address">github.com</td>
-	        <td id="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
+	        <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
 	        <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
 	      </tr>
         </table>
@@ -213,8 +236,8 @@
 	<div id="addNewItemModal">
 	  <div id="addNewItemForm">
 	    <span id="closeBtn">&times;</span>
-    <!--ADD FORM-->
-      <form>
+        <!--ADD FORM-->
+        <form>
 		  Website Address:<br/>
 		  <input type="text" id="addNewAddress"/><br/><br/>
 		  Username:<br/>
@@ -223,10 +246,11 @@
 		  <input type="password" id="addNewPwd"/><br/><br/>
 		  Confirm Password:<br/>
 		  <input type="password" id="addNewConfirm"/>
-		  <button type="submit" id="submitBtn">Next</button>
+		  <span id="submitBtn">Next</span>
 		</form>
 	  </div>
 	</div>
+<<<<<<< HEAD
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <!--Firebase DataBase-->
@@ -257,27 +281,39 @@
       $("#addNewIcon").click(function() {
 		      $("#addNewItemModal").css("display", "block");
 		  });
+=======
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+>>>>>>> ee9517fef31f6d7b2f4e108198a2dbcba63b6863
 
-      //CLOSE ADD MENU
-      $("#closeBtn").click(function() {
-		      $("#addNewItemModal").css("display", "none");
-		  });
+    <!--Firebase DataBase-->
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBIjtMzt9U8DuqFWbyN0E5aLAC-5bLaq_U",
+            authDomain: "nov01-bbe3f.firebaseapp.com",
+            databaseURL: "https://nov01-bbe3f.firebaseio.com",
+            projectId: "nov01-bbe3f",
+            storageBucket: "nov01-bbe3f.appspot.com",
+            messagingSenderId: "512486070002"
+        };
+        firebase.initializeApp(config);
+    </script>
 
-      //DETAILS
-      $("#detailsBar").click(function(){
-          if ($("#detailsBar").css("bottom") == "-2px") {
-              $("#detailsBar").animate({bottom: "298px"}, 300);
-              $("#detailsPanel").slideDown(300);
-			  $("#detailsBar i").attr("class", "fas fa-angle-down");
-          } else if ($("#detailsBar").css("bottom") == "298px") {
-              $("#detailsBar").animate({bottom: "-2px"}, 300);
-              $("#detailsPanel").slideUp(300);
-			  $("#detailsBar i").attr("class", "fas fa-angle-up");
-          }
-      });
-      
+    <script>
+        //REMOVE STORED PASSWORD
+        $(".removeIcon i").click(function(){
+            var item = $(this).parent().parent().children("td.address").text();
+            if (confirm("Would you like to remove the stored password for \"" + item + "\"?"))
+		        $(this).parent().parent().remove();
+        });
 
+        //ADD NEW PASSWORD POP-UP
+        $("#addNewIcon").click(function() {
+		    $("#addNewItemModal").css("display", "block");
+		});
 
+<<<<<<< HEAD
       
       //FIREBASE??
       // Get a reference to the database service
@@ -287,8 +323,69 @@
       const preObject = document.getElementById('address');
 
       const dbRefObject = firebase.database().ref().child('address');
+=======
+        //CLOSE ADD MENU
+        $("#closeBtn").click(function() {
+		    $("#addNewItemModal").css("display", "none");
+		});
+		
+		//SUBMIT BUTTON ON ADD MENU
+		$("#submitBtn").click(function() {
+		    $("#addNewItemModal").css("display", "none");
+			ref.once("value").then(function(snapshot) {
+				let address = snapshot.child("Master Account/Website/Address").val();
+				let tr = $("<tr></tr>");
+				$("tbody").append(tr);
+				let td1 = $("<td></td>");
+				td1.text(address);
+				td1.addClass("address");
+				let td2 = $("<td></td>");
+				td2.addClass("strength");
+				td2.text("Strength ");
+				let td3 = $("<td></td>");
+				td3.addClass("removeIcon");
+				let removeIcon = $("<i></i>");
+				removeIcon.addClass("fas fa-trash-alt");
+				tr.append(td1, td2, td3);
+				td3.append(removeIcon);
+				removeIcon.click(function(){
+					var item = $(this).parent().parent().children("td.address").text();
+					if (confirm("Would you like to remove the stored password for \"" + item + "\"?"))
+					$(this).parent().parent().remove();
+				});
+			});
+		});
 
-      dbRefObject.on('value', snap => console.log(snap.val()));
+        //DETAILS
+        $("#detailsBar").click(function(){
+            if ($("#detailsBar").css("bottom") == "-2px") {
+                $("#detailsBar").animate({bottom: "298px"}, 300);
+                $("#detailsPanel").slideDown(300, function() {
+					$("#detailsBar i").attr("class", "fas fa-angle-down");
+				});
+            } else if ($("#detailsBar").css("bottom") == "298px") {
+                $("#detailsBar").animate({bottom: "-2px"}, 300);
+                $("#detailsPanel").slideUp(300, function() {
+					$("#detailsBar i").attr("class", "fas fa-angle-up");
+				});
+            }
+        });
+		
+		//LOG OUT
+		$("#logOut").click(function() {
+		    alert("Not ready yet.");
+		});
+		
+        //FIREBASE??
+        // Get a reference to the database service
+        var database = firebase.database();
+		var ref = database.ref();
+>>>>>>> ee9517fef31f6d7b2f4e108198a2dbcba63b6863
+
+        //  const preObject = document.getElemenyById('object');
+        const dbRefObject = firebase.database().ref().child('object');
+		
+        dbRefObject.on('value', snap => console.log(snap.val()));
 	</script>
   </body>
 </html>
