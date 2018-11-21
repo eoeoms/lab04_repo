@@ -231,6 +231,7 @@
 
   <!--Firebase DataBase-->
   <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+  
   <script>
     // Initialize Firebase
     var config = {
@@ -281,9 +282,11 @@
       //FIREBASE??
       // Get a reference to the database service
       var database = firebase.database();
+      
+      //use this to input the data to the screen
+      const preObject = document.getElementById('address');
 
-      //  const preObject = document.getElemenyById('object');
-      const dbRefObject = firebase.database().ref().child('object');
+      const dbRefObject = firebase.database().ref().child('address');
 
       dbRefObject.on('value', snap => console.log(snap.val()));
 	</script>
