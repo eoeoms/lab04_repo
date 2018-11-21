@@ -173,7 +173,9 @@
         top: 20px;
 		background-color: #4CAF50;
         color: white;
-        padding: 10px 35px; /* dimentions for button */
+		width: 80px;
+		text-align: center;
+        padding: 10px 25px;
         border: none;
         cursor: pointer;
         margin: 0 auto;
@@ -244,7 +246,7 @@
 		  <input type="password" id="addNewPwd"/><br/><br/>
 		  Confirm Password:<br/>
 		  <input type="password" id="addNewConfirm"/>
-		  <button type="submit" id="submitBtn">Next</button>
+		  <span id="submitBtn">Next</span>
 		</form>
 	  </div>
 	</div>
@@ -333,6 +335,7 @@
         //FIREBASE??
         // Get a reference to the database service
         var database = firebase.database();
+		var ref = database.ref();
 
         //  const preObject = document.getElemenyById('object');
         const dbRefObject = firebase.database().ref().child('object');
