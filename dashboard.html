@@ -289,11 +289,11 @@
 		$("#submitBtn").click(function() {
 		    $("#addNewItemModal").css("display", "none");
 			ref.once("value").then(function(snapshot) {
-				var password = snapshot.child("Master Account/Website/Password").val();
+				let address = snapshot.child("Master Account/Website/Address").val();
 				let tr = $("<tr></tr>");
 				$("tbody").append(tr);
 				let td1 = $("<td></td>");
-				td1.text(password);
+				td1.text(address);
 				td1.addClass("address");
 				let td2 = $("<td></td>");
 				td2.addClass("strength");
