@@ -250,40 +250,7 @@
 		</form>
 	  </div>
 	</div>
-<<<<<<< HEAD
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-  <!--Firebase DataBase-->
-  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-  
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyBIjtMzt9U8DuqFWbyN0E5aLAC-5bLaq_U",
-      authDomain: "nov01-bbe3f.firebaseapp.com",
-      databaseURL: "https://nov01-bbe3f.firebaseio.com",
-      projectId: "nov01-bbe3f",
-      storageBucket: "nov01-bbe3f.appspot.com",
-      messagingSenderId: "512486070002"
-    };
-    firebase.initializeApp(config);
-  </script>
-
-	<script>
-    //REMOVE
-      $(".removeIcon i").click(function(){
-          var item = $(this).parent().parent().children("td.address").text();
-          if (confirm("Would you like to remove the stored password for \"" + item + "\"?"))
-				  $(this).parent().parent().remove();
-      });
-
-      //ADD PASSWORD
-      $("#addNewIcon").click(function() {
-		      $("#addNewItemModal").css("display", "block");
-		  });
-=======
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
->>>>>>> ee9517fef31f6d7b2f4e108198a2dbcba63b6863
 
     <!--Firebase DataBase-->
     <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
@@ -313,17 +280,6 @@
 		    $("#addNewItemModal").css("display", "block");
 		});
 
-<<<<<<< HEAD
-      
-      //FIREBASE??
-      // Get a reference to the database service
-      var database = firebase.database();
-      
-      //use this to input the data to the screen
-      const preObject = document.getElementById('address');
-
-      const dbRefObject = firebase.database().ref().child('address');
-=======
         //CLOSE ADD MENU
         $("#closeBtn").click(function() {
 		    $("#addNewItemModal").css("display", "none");
@@ -380,7 +336,6 @@
         // Get a reference to the database service
         var database = firebase.database();
 		var ref = database.ref();
->>>>>>> ee9517fef31f6d7b2f4e108198a2dbcba63b6863
 
         //  const preObject = document.getElemenyById('object');
         const dbRefObject = firebase.database().ref().child('object');
