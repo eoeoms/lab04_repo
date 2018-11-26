@@ -18,6 +18,7 @@ h1 {
   font-family: Caviar;
   color: white;
   font-size: 30pt;
+  user-select: none;
 }
 #logout {
   color: white;
@@ -27,6 +28,7 @@ h1 {
   right: 0;
   font-size: 14pt;
   cursor: pointer;
+  user-select: none;
 }
 #logout:hover {
   color: #dddddd;
@@ -46,6 +48,7 @@ h1 {
   font-size: 40px;
   color: white;
   cursor: pointer;
+  user-select: none;
 }
 #mainPanel {
   width: 800px;
@@ -65,8 +68,6 @@ h1 {
 table {
   font-family: arial, sans-serif;
   width: 100%;
-  max-height: 446px;
-  overflow-y: auto;
   border-bottom: solid 1px #dddddd;
   border-collapse: collapse;
 }
@@ -95,6 +96,9 @@ tr:nth-child(even) {
   margin-top: 10%;
   display: none;
   font-family: sans-serif;
+  color: grey;
+  font-size: 14pt;
+  user-select: none;
 }
 #detailsBar {
   width: 100%;
