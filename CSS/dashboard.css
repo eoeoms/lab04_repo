@@ -1,0 +1,176 @@
+@font-face{
+  font-family: Caviar;
+  src: url('../Fonts/CaviarDreams_Bold.ttf')
+}
+body {
+  background-color: rgba(4, 40, 68, 0.85);
+}
+#wrapper {
+  width: 870px;
+  margin: 0 auto;
+  margin-top: 30px;
+  position: relative;
+}
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: Caviar;
+  color: white;
+  font-size: 30pt;
+}
+#logout {
+  color: white;
+  font-family: Caviar;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 14pt;
+  cursor: pointer;
+}
+#logout:hover {
+  color: #dddddd;
+}
+#searchBar {
+  position: absolute;
+  top: 60px;
+  left: 70px;
+  border-radius: 10px;
+  padding-left: 5px;
+}
+#addNewIcon {
+  float: right;
+  position: absolute;
+  top: 50px;
+  right: 100px;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+}
+#tableContainer {
+  width: 800px;
+  height: 70%;
+  margin: 60px auto;
+  clear: both;
+  border: 2px solid #dddddd;
+  position: relative;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+}
+table {
+  font-family: arial, sans-serif;
+  width: 100%;
+  max-height: 446px;
+  overflow-y: auto;
+  border-bottom: solid 1px #dddddd;
+  border-collapse: collapse;
+}
+td {
+  padding: 8px;
+}
+tr:first-child td:first-child {
+  width: 35%;
+}
+tr:first-child td:nth-child(2) {
+  width: 55%;
+}
+tr:first-child td:nth-child(3) {
+  width: 10%;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.removeIcon i {
+  font-size: 20px;
+cursor: pointer;
+}
+#detailsBar {
+  width: 100%;
+  height: 50px;
+  border-top: solid 2px #dddddd;
+  border-bottom: solid 2px #dddddd;
+  position: absolute;
+  bottom: -2px;
+  background-color: white;
+  cursor: pointer;
+}
+#detailsBar span {
+  line-height: 50px;
+  padding-left: 20px;
+  font-family: sans-serif;
+}
+#detailsBar i {
+  float: right;
+  margin: 10px 30px;
+  font-size: 30px;
+}
+#detailsPanel {
+  display: none;
+  width: 100%;
+  height: 298px;
+  position: absolute;
+  bottom: 0;
+  background-color: #eeeeee;
+  font-family: sans-serif;
+}
+#addNewItemModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 120px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4);
+}
+#addNewItemForm {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 50px 30px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 400px;
+  filter: drop-shadow(#101010 0 0 5px);
+  position: relative;
+  font-family: Caviar;
+}
+#closeBtn {
+  color: #aaaaaa;
+  font-size: 36px;
+  font-weight: bold;
+  position: absolute;
+  right: 20px;
+  top: 5px;
+}
+#closeBtn:hover {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+form {
+  margin: auto;
+  width: 80%;
+}
+form > input {
+  width: 100%;
+  height: 30px;
+  font-size: 18px;
+}
+#submitBtn {
+  position: relative;
+  top: 20px;
+  background-color: #4CAF50;
+  color: white;
+  width: 80px;
+  text-align: center;
+  padding: 10px 25px;
+  border: none;
+  cursor: pointer;
+  margin: 0 auto;
+  display: block;
+  font-size: 15pt;
+  font-family: Caviar;
+}
