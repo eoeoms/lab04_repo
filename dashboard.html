@@ -104,13 +104,13 @@
 
     dbRefObject.on('value', snap => console.log(snap.val()));
 
-    var userName = document.getElementById("addNewAddress").value;
-    var website = document.getElementById("addNewUsername").value;
-    var password = document.getElementById("addNewPwd").value;
+    var userName = document.getElementById("addNewAddress").val();
+    var website = document.getElementById("addNewUsername").val();
+    var password = document.getElementById("addNewPwd").val();
 
     function writeUserData(website, userName, password) {
       console.log("inside write user data");
-      firebase.database().ref('users/abc').update({
+      firebase.database().ref('Master Account/Website').update({
         website: website,
         userName: userName,
         password: password
