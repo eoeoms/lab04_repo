@@ -1,6 +1,5 @@
 <!DOCTYPE=html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <title>SafeStore</title>
@@ -9,7 +8,21 @@
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="CSS/dashboard.css">
-</head>
+  <!--Firebase DataBase-->
+  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+  <script>
+      // Initialize Firebase
+      var config = {
+          apiKey: "AIzaSyBIjtMzt9U8DuqFWbyN0E5aLAC-5bLaq_U",
+          authDomain: "nov01-bbe3f.firebaseapp.com",
+          databaseURL: "https://nov01-bbe3f.firebaseio.com",
+          projectId: "nov01-bbe3f",
+          storageBucket: "nov01-bbe3f.appspot.com",
+          messagingSenderId: "512486070002"
+      };
+      firebase.initializeApp(config);
+  </script>
+ </head>
 
 <body>
   <div id="wrapper">
@@ -17,34 +30,18 @@
     <span id="logOut">Log out</span>
     <input type="text" id="searchBar" placeholder="Search">
     <i class="material-icons" id="addNewIcon">add_circle_outline</i>
-    <div id="tableContainer">
-      <table id="storedWebsites">
-        <tr>
-          <td class="address">id.bcit.ca</td>
-          <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
-          <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
-        </tr>
-        <tr>
-          <td class="address">my.bcit.ca</td>
-          <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
-          <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
-        </tr>
-        <tr>
-          <td class="address">google.com</td>
-          <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
-          <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
-        </tr>
-        <tr>
-          <td class="address">facebook.com</td>
-          <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
-          <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
-        </tr>
-        <tr>
-          <td class="address">github.com</td>
-          <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
-          <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
-        </tr>
-      </table>
+    <div id="mainPanel">
+      <div id="tableContainer">
+        <table id="storedWebsites">
+          <tbody id="tbody"><tr>
+              <td class="address">github.com</td>
+              <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
+              <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
+            </tr></tbody>
+        </table>
+        <!-- when there are no items -->
+        <p id="noItems">No items found.</p>
+      </div>
       <div id="detailsBar">
         <span>Details</span>
         <i class='fas fa-angle-up'></i>
@@ -76,22 +73,9 @@
       </form>
     </div>
   </div>
+  
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-  <!--Firebase DataBase-->
-  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyBIjtMzt9U8DuqFWbyN0E5aLAC-5bLaq_U",
-      authDomain: "nov01-bbe3f.firebaseapp.com",
-      databaseURL: "https://nov01-bbe3f.firebaseio.com",
-      projectId: "nov01-bbe3f",
-      storageBucket: "nov01-bbe3f.appspot.com",
-      messagingSenderId: "512486070002"
-    };
-    firebase.initializeApp(config);
-  </script>
   <script src="JS/functionality.js"></script>
   <script>
     //FIREBASE??

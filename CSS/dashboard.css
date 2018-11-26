@@ -1,19 +1,16 @@
-@font-face {
+@font-face{
   font-family: Caviar;
   src: url('../Fonts/CaviarDreams_Bold.ttf')
 }
-
 body {
   background-color: rgba(4, 40, 68, 0.85);
 }
-
 #wrapper {
   width: 870px;
   margin: 0 auto;
   margin-top: 30px;
   position: relative;
 }
-
 h1 {
   text-align: center;
   margin-top: 20px;
@@ -22,7 +19,6 @@ h1 {
   color: white;
   font-size: 30pt;
 }
-
 #logout {
   color: white;
   font-family: Caviar;
@@ -32,11 +28,9 @@ h1 {
   font-size: 14pt;
   cursor: pointer;
 }
-
 #logout:hover {
   color: #dddddd;
 }
-
 #searchBar {
   position: absolute;
   top: 60px;
@@ -44,7 +38,6 @@ h1 {
   border-radius: 10px;
   padding-left: 5px;
 }
-
 #addNewIcon {
   float: right;
   position: absolute;
@@ -54,8 +47,7 @@ h1 {
   color: white;
   cursor: pointer;
 }
-
-#tableContainer {
+#mainPanel {
   width: 800px;
   height: 70%;
   margin: 60px auto;
@@ -66,7 +58,10 @@ h1 {
   border-radius: 5px;
   overflow: hidden;
 }
-
+#tableContainer {
+  overflow-y: auto;
+  height: calc(100% - 52px);
+}
 table {
   font-family: arial, sans-serif;
   width: 100%;
@@ -75,32 +70,32 @@ table {
   border-bottom: solid 1px #dddddd;
   border-collapse: collapse;
 }
-
 td {
   padding: 8px;
 }
-
 tr:first-child td:first-child {
   width: 35%;
 }
-
 tr:first-child td:nth-child(2) {
   width: 55%;
 }
-
 tr:first-child td:nth-child(3) {
   width: 10%;
 }
-
 tr:nth-child(even) {
   background-color: #dddddd;
 }
-
 .removeIcon i {
   font-size: 20px;
   cursor: pointer;
 }
-
+#noItems {
+  text-align: center;
+  margin: 0;
+  margin-top: 10%;
+  display: none;
+  font-family: sans-serif;
+}
 #detailsBar {
   width: 100%;
   height: 50px;
@@ -111,19 +106,16 @@ tr:nth-child(even) {
   background-color: white;
   cursor: pointer;
 }
-
 #detailsBar span {
   line-height: 50px;
   padding-left: 20px;
   font-family: sans-serif;
 }
-
 #detailsBar i {
   float: right;
   margin: 10px 30px;
   font-size: 30px;
 }
-
 #detailsPanel {
   display: none;
   width: 100%;
@@ -133,25 +125,22 @@ tr:nth-child(even) {
   background-color: #eeeeee;
   font-family: sans-serif;
 }
-
 #addNewItemModal {
   display: none;
   position: fixed;
   z-index: 1;
-  padding-top: 120px;
-  /* Location of the box */
+  padding-top: 120px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  /* Enable scroll if needed */
-  background-color: rgba(0, 0, 0, 0.4);
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4);
 }
-
 #addNewItemForm {
   background-color: #fefefe;
   margin: auto;
+  margin-bottom: 120px;
   padding: 50px 30px;
   border: 1px solid #888;
   border-radius: 10px;
@@ -160,7 +149,6 @@ tr:nth-child(even) {
   position: relative;
   font-family: Caviar;
 }
-
 #closeBtn {
   color: #aaaaaa;
   font-size: 36px;
@@ -169,24 +157,20 @@ tr:nth-child(even) {
   right: 20px;
   top: 5px;
 }
-
 #closeBtn:hover {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
-
 form {
   margin: auto;
   width: 80%;
 }
-
-form>input {
+form > input {
   width: 100%;
   height: 30px;
   font-size: 18px;
 }
-
 #submitBtn {
   position: relative;
   top: 20px;
