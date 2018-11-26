@@ -17,6 +17,13 @@
             font-size: 50pt;
         }
 
+        /*
+
+        CSS FOR VERSION 1
+        ____________________
+        ***safestore.html***
+        ____________________
+        
         input.login {
             width: 40%;
             height: 7%;
@@ -46,7 +53,6 @@
         }
 
         .register {
-            /*display: inline-block;*/
             margin: auto;
             float: right;
             text-decoration: none;
@@ -70,13 +76,11 @@
             position: fixed;
             z-index: 1;
             padding-top: 150px;
-            /* Location of the box */
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             overflow: auto;
-            /* Enable scroll if needed */
             background-color: rgba(0, 0, 0, 0.4);
         }
 
@@ -139,4 +143,4 @@
             margin: 0 auto;
             display: block;
             font-size: 15pt;
-        }
+        }*/
