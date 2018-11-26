@@ -1,35 +1,35 @@
 <!DOCTYPE=html>
 <html>
 
-    <head>
-        <meta charset=utf-8>
-        <title>SafeStore</title>
+<head>
+    <meta charset=utf-8>
+    <title>SafeStore</title>
 
 
-        <!-- Firebase App is always required and must be first -->
-        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
 
-        <!-- Add additional services that you want to use -->
-        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-database.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-firestore.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-messaging.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-functions.js"></script>
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-functions.js"></script>
 
-        <!-- Comment out (or don't include) services that you don't want to use -->
-        <!-- <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-storage.js"></script> -->
+    <!-- Comment out (or don't include) services that you don't want to use -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-storage.js"></script> -->
 
-        <script>
+    <script>
         var config = {
             // ...
         };
         firebase.initializeApp(config);
         </script>
-        
-        <!--Firebase DataBase-->
-        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-            <script>
-                 // Initialize Firebase
+
+    <!--Firebase DataBase-->
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script>
+        // Initialize Firebase
                 var config = {
                     apiKey: "AIzaSyBIjtMzt9U8DuqFWbyN0E5aLAC-5bLaq_U",
                     authDomain: "nov01-bbe3f.firebaseapp.com",
@@ -40,87 +40,91 @@
                 };
                 firebase.initializeApp(config);
         </script>
-        <link rel="stylesheet" href="CSS/login.css">
-    </head>
-    <body>
-        <div class="register"><h3 id="registerBtn">Register</h3></div>
-        <br><br><br>
+    <link rel="stylesheet" href="CSS/login.css">
+</head>
 
-        <div class = "Header">
-          <h1>SafeStore</h1>
+<body>
+    <div class="register">
+        <h3 id="registerBtn">Register</h3>
+    </div>
+    <br><br><br>
+
+    <div class="Header">
+        <h1>SafeStore</h1>
+    </div>
+    <div id="form">
+        <form>
+            <div class="container">
+
+                <!--Username-->
+                <input id="email_field" class="login" type="email" placeholder="Email" name="email" required>
+                <br>
+                <!--Password-->
+                <input id="password_field" class="login" type="password" placeholder="Enter Password" name="psw"
+                    required>
+                <br>
+
+                <div class="container">
+
+                    <button type="submit">Login</button>
+                    <br>
+
+                    <div class="secondary"></div>
+                    <span class="secondary"><a class="secondary" href="#">Forgot password?</a></span>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+    <div id="createAccountModal">
+        <div id="registerForm">
+            <span id="closeBtn">&times;</span>
+            <form>
+                Email:<br />
+                <input type="text" id="newEmail" /><br /><br />
+                Password:<br />
+                <input type="password" id="newPwd" /><br /><br />
+                Confirm Password:<br />
+                <input type="password" id="newConfirm" /><br />
+                <span id="submitBtn">Register</span>
+            </form>
         </div>
-        <div id="form">    
-           <form>
-             <div class="container">
-               
-               <!--Username-->
-               <input id="email_field" class="login" type="email" placeholder="Email" name="email" required>
-               <br>
-               <!--Password-->
-               <input id ="password_field" class="login" type="password" placeholder="Enter Password" name="psw" required>
-               <br>
-               
-               <div class="container">
-           
-                 <button type="submit">Login</button>
-                 <br>
-           
-                 <div class="secondary"></div>
-                   <span class="secondary"><a class ="secondary" href="#">Forgot password?</a></span>
-                 </div>
-                   
-               </div>
-               
-             </form>
-		</div>
-		<div id="createAccountModal">
-	      <div id="registerForm">
-	        <span id="closeBtn">&times;</span>
-			<form>
-			  Email:<br/>
-			  <input type="text" id="newEmail"/><br/><br/>
-			  Password:<br/>
-			  <input type="password" id="newPwd"/><br/><br/>
-			  Confirm Password:<br/>
-			  <input type="password" id="newConfirm"/><br/>
-			  <span id="submitBtn">Register</span>
-			</form>
-	      </div>
-		</div>
+    </div>
 
 
-        
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script>
-		$("#registerBtn").click(function() {
-		      $("#createAccountModal").css("display", "block");
-		  });
-        $("#closeBtn").click(function() {
-		      $("#createAccountModal").css("display", "none");
-		  });
-        
-		//Register submit
-        $("#submitBtn").click(function(){
-			let email = document.getElementById("newEmail").value;
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $("#registerBtn").click(function () {
+            $("#createAccountModal").css("display", "block");
+        });
+        $("#closeBtn").click(function () {
+            $("#createAccountModal").css("display", "none");
+        });
+
+        //Register submit
+        $("#submitBtn").click(function () {
+            let email = document.getElementById("newEmail").value;
             let confirmPassword = document.getElementById("newPwd").value;
             let confirm = document.getElementById("newConfirm").value;
-			
-            if(confirmPassword == confirm){
-				//close pop-up
-				$("#createAccountModal").css("display", "none");
-				
-				//clear fields
-				document.getElementById("newEmail").value = "";
-				document.getElementById("newConfirm").value = "";
-				document.getElementById("newPwd").value = "";
+
+            if (confirmPassword == confirm) {
+                //close pop-up
+                $("#createAccountModal").css("display", "none");
+
+                //clear fields
+                document.getElementById("newEmail").value = "";
+                document.getElementById("newConfirm").value = "";
+                document.getElementById("newPwd").value = "";
             }
         });
-		
-		/********************************************************
-		 ******************* Work in progress *******************
-		 ********************************************************/
-		
-        firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function(error) {
+
+        /********************************************************
+         ******************* Work in progress *******************
+         ********************************************************/
+
+        firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -131,14 +135,13 @@
         var userEmail = document.getElementById("email_field").value;
         var userPass = document.getElementById("password_field").value;
 
-        firebase.auth().createUserWithEmailAndPassword(newEmail, newPwd).catch(function(error) {
-        // Handle Errors here.
+        firebase.auth().createUserWithEmailAndPassword(newEmail, newPwd).catch(function (error) {
+            // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-        // ...
+            // ...
         });
-
-        </script>
-    </body>
+    </script>
+</body>
 
 </html>
