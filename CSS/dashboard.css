@@ -13,8 +13,6 @@ body {
 }
 h1 {
   text-align: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
   font-family: Caviar;
   color: white;
   font-size: 30pt;
@@ -166,11 +164,11 @@ tr:nth-child(even) {
   text-decoration: none;
   cursor: pointer;
 }
-form {
+#addNewItemForm > form {
   margin: auto;
   width: 80%;
 }
-form > input {
+#addNewItemForm > form > input {
   width: 100%;
   height: 30px;
   font-size: 18px;
