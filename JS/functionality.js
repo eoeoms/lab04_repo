@@ -1,11 +1,22 @@
+$(document).ready(function () {
+
+
+/*
+//reading values from database
+firebase.database().ref().once("value").then(function (snapshot) {
+    let address = snapshot.child("Master Account/Website/Address").val();
+    //console.log(address);
+});
+*/
+
 //IF NO STORED PASSWORDS, DISPLAY MESSAGE
+checkItems();
 function checkItems () {
     if (!document.getElementById("tbody").hasChildNodes()) {
         $("#storedWebsites").css("display", "none");
         $("#noItems").css("display", "block");
     }
 }
-checkItems();
 
 //REMOVE STORED PASSWORD
 $(".removeIcon i").click(function () {
@@ -19,6 +30,18 @@ $(".removeIcon i").click(function () {
 //ADD NEW PASSWORD POP-UP
 $("#addNewIcon").click(function () {
     $("#addNewItemModal").css("display", "block");
+    $("#addNewAddress").focus(); //focuses on first input field
+});
+
+//triggers submit button when Enter key is pressed inside any input fields
+$("#addNewItemForm input").keyup(function(event) {
+    if (event.which === 13) {
+        document.getElementById("submitBtn").click();
+    }
+    //close pop-up if esc pressed
+    if (event.which === 27) {
+        $("#addNewItemModal").css("display", "none");
+    }
 });
 
 //CLOSE ADD MENU
@@ -27,22 +50,37 @@ $("#closeBtn").click(function () {
 });
 
 //SUBMIT BUTTON ON ADD MENU
+//to add lots of table rows fast, comment out line 40 to 44, and line 95
 $("#submitBtn").click(function () {
-    $("#addNewItemModal").css("display", "none"); //close pop-up
-    $("#noItems").css("display", "none"); //don't show no item message
-    $("#storedWebsites").css("display", "table"); //show table
+    if ($("#addNewAddress").val().length == 0) {
+        $("#validation > p").text("Website address should be longer.")
+    } else if ($("#addNewPwd").val() == "" || $("#addNewPwd").val() != $("#addNewConfirm").val()) {
+        $("#validation > p").text("Passwords must match.")
+    } else {
+        $("#addNewItemModal").css("display", "none"); //close pop-up
+        $("#noItems").css("display", "none"); //don't show no item message
+        $("#storedWebsites").css("display", "table"); //show table
+        
+        let addedAddress = $("#addNewAddress").val(); //get added address
+        /***************************************************
+         **********Add values to database here**************
+         ***************************************************/
+        
+        //clear fields
+        $("#addNewAddress").val("");
+        $("#addNewUsername").val("");
+        $("#addNewPwd").val("");
+        $("#addNewConfirm").val("");
+        $("#validation > p").text("");
     
-    //appending new table row
-    ref.once("value").then(function (snapshot) {
+        //appending new table row
         let tr = $("<tr></tr>");
         $("tbody").append(tr);
-        //get value from database which is used to set td's text six lines below
-        let address = snapshot.child("Master Account/Website/Address").val(); 
         
         //first td: website address
         let td1 = $("<td></td>");
         td1.addClass("address");
-        td1.text(address);
+        td1.text(addedAddress);
         
         //second td: strength bar
         let td2 = $("<td></td>");
@@ -69,7 +107,7 @@ $("#submitBtn").click(function () {
                 checkItems(); //check if all removed
             }
         });
-    });
+    }
 });
 
 //DETAILS
@@ -90,4 +128,7 @@ $("#detailsBar").click(function () {
 //LOG OUT
 $("#logOut").click(function () {
     alert("Not ready yet.");
+});
+
+
 });
