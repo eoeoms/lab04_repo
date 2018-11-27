@@ -86,14 +86,27 @@
         // Inject the login interface into the HTML
         ui.start('#firebaseui-auth-container', uiConfig);
 
-        //WRITES USER TO DATABASE
-        function writeUserData(uid, displayName, email) {
-            firebase.database().ref('users/' + uid).set({
-                uid: uid,
-                displayName: displayName,
-                email: email,
-            });
-        }
+
+		
+		
+		
+		
+		
+		
+		(function(){
+
+    // for the currently authenticated firebase user
+    // create your own "user" node in the datebase using 
+    // the firebase generated "uid"
+
+			firebase.auth().onAuthStateChanged(function(user){
+				firebase.database().ref("users/"+user.uid).update(
+				{
+					// "name":user.displayName, 
+					"email":user.email
+				});
+			});
+			})()
     </script>
 
 </body>
