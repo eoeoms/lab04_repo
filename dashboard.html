@@ -1,17 +1,22 @@
 <!DOCTYPE=html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>SafeStore</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="CSS/dashboard.css">
   <!--Firebase DataBase-->
   <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+
   <script>
-      // Initialize Firebase
+    // Initialize Firebase
       var config = {
           apiKey: "AIzaSyBIjtMzt9U8DuqFWbyN0E5aLAC-5bLaq_U",
           authDomain: "nov01-bbe3f.firebaseapp.com",
@@ -22,7 +27,7 @@
       };
       firebase.initializeApp(config);
   </script>
- </head>
+</head>
 
 <body>
   <div id="wrapper">
@@ -33,11 +38,7 @@
     <div id="mainPanel">
       <div id="tableContainer">
         <table id="storedWebsites">
-          <tbody id="tbody"><tr>
-              <td class="address">github.com</td>
-              <td class="strength">Strength <img src="https://dummyimage.com/100x10/000/fff&text=+"></td>
-              <td class="removeIcon"><i class="fas fa-trash-alt"></i></td>
-            </tr></tbody>
+          <tbody id="tbody"></tbody>
         </table>
         <!-- when there are no items -->
         <p id="noItems">No items found.</p>
@@ -69,50 +70,68 @@
         <input type="password" id="addNewPwd" /><br /><br />
         Confirm Password:<br />
         <input type="password" id="addNewConfirm" />
-        <div id="validation"><p></p></div>
-        <span id="submitBtn">Next</span>
+        <div id="validation">
+          <p></p>
+        </div>
+        <button id="submitBtn">Next</button>
       </form>
     </div>
   </div>
-  
-  
+
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="JS/functionality.js"></script>
+
+
+
+
   <script>
     //FIREBASE??
     // Get a reference to the database service
     var database = firebase.database();
     var ref = database.ref();
 
-    //  const preObject = document.getElemenyById('object');
-    const dbRefObject = firebase.database().ref().child('object');
 
-    //video.
-    dbRefObject.on('value', snap => console.log(snap.val()));
 
-    //Get's user input.
-    var userName = document.getElementById("addNewAddress").value;
-    var website = document.getElementById("addNewUsername").value;
-    var password = document.getElementById("addNewPwd").value;
 
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        let userid = user.uid;
+        console.log(userid);
+      } else {
+
+      }
+    });
+
+/*
 
     //Writes user data to the firebase.
     function writeUserData(website, userName, password) {
-      console.log("inside write user data");
+      //Get's user input.
+      console.log(website);
 
-      firebase.database().ref('Master Account/Website').update({
-        website: website,
-        userName: userName,
-        password: password
+      firebase.database().ref('users/' + user.uid).set({
+        "website": website,
+        "userName": userName,
+        "password": password
 
       });
     }
+
 
     //submit button
     var submit = document.getElementById("submitBtn");
 
     //On click, write user data.
-    submit.click(writeUserData());
+    submit.click(
+          //Get's user input.
+    let userName = document.getElementById("addNewAddress").value;
+    let website = document.getElementById("addNewUsername").value;
+    let password = document.getElementById("addNewPwd").value;
+    writeUserData(website, userName, password)
+    );
+    */
   </script>
 </body>
 
