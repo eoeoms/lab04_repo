@@ -189,7 +189,12 @@ $(document).ready(function () {
 
     //LOG OUT
     $("#logOut").click(function () {
-        alert("Not ready yet.");
+        firebase.auth().signOut().then(function() {
+            window.location.href = "./safestoreV2.html";
+          }).catch(function(error) {
+            // An error happened.
+          });
+        //alert("Not ready yet.");
     });
 
 
