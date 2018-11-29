@@ -3,7 +3,6 @@ $(document).ready(function () {
     var userid;
     var numOfItems;
     var rootRef = firebase.database().ref();
-    var userRef;
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
           userid = user.uid;
@@ -11,13 +10,11 @@ $(document).ready(function () {
   
         }
       });
-    
-    
-    userRef = firebase.database().ref("users/" + userid);
 
     
     //reading values from database
     rootRef.once("value").then(function (snapshot) {
+        
         numOfItems = snapshot.child("users/" + userid + "/numsites").val();
         
         //builds table off of database
@@ -25,57 +22,13 @@ $(document).ready(function () {
             
             var query = firebase.database().ref("users/" + userid + "/websites").orderByKey();
             query.once("value").then(function(snapshot) {
-                $("#noItems").css("display", "none"); //don't show no item message
-                $("#storedWebsites").css("display", "table"); //show table
                 
                 snapshot.forEach(function(childSnapshot) {
-                    
-                    // key will be "ada" the first time and "alan" the second time
-                    //var key = childSnapshot.child("address").key;
-                    // childData will be the actual contents of the child
                     var address = childSnapshot.child("address").val();
                     var rowID = childSnapshot.key;
-                    
-                    //appending new table row
-                    let tr = $("<tr></tr>");
-                    tr.attr("id", rowID);
-                    $("tbody").append(tr);
-            
-                    //first td: website address
-                    let td1 = $("<td></td>");
-                    td1.addClass("address");
-                    td1.text(address);
-            
-                    //second td: strength bar
-                    let td2 = $("<td></td>");
-                    td2.addClass("strength");
-                    td2.text("Strength ");
-                    let barImage = $("<img>");
-                    barImage.attr("src", "https://dummyimage.com/100x10/000/fff&text=+");
-                    td2.append(barImage);
-            
-                    //third td: remove icon
-                    let td3 = $("<td></td>");
-                    td3.addClass("removeIcon");
-                    let removeIcon = $("<i></i>");
-                    removeIcon.addClass("fas fa-trash-alt");
-                    td3.append(removeIcon);
-            
-                    tr.append(td1, td2, td3);
-            
-                    //add event listener on remove icon
-                    removeIcon.click(function () {
-                        let item = $(this).parent().parent().children("td.address").text();
-                        if (confirm("Would you like to remove the stored password for \"" + item + "\"?")) {
-                            
-                            firebase.database().ref("users/" + userid + "/websites/" + rowID).remove();
-                            
-                            $(this).parent().parent().remove();
-                            checkItems(); //check if all removed
-                        }
-                    });
-                    
+                    appendRow(address, rowID);
                 });
+                
             });
         }
     });
@@ -90,17 +43,6 @@ $(document).ready(function () {
             $("#noItems").css("display", "block");
         }
     }
-    
-    /*
-    //REMOVE STORED PASSWORD
-    $(".removeIcon i").click(function () {
-        let item = $(this).parent().parent().children("td.address").text();
-        if (confirm("Would you like to remove the stored password for \"" + item + "\"?")) {
-            $(this).parent().parent().remove();
-            checkItems(); //check if all removed
-        }
-    });
-    */
 
     //ADD NEW PASSWORD POP-UP
     $("#addNewIcon").click(function () {
@@ -125,7 +67,7 @@ $(document).ready(function () {
     });
 
     //SUBMIT BUTTON ON ADD MENU
-    //to add lots of table rows fast, comment out line 40 to 44, and line 95
+    //to add lots of table rows fast, comment out line 76 to 80, and line 114
     $("#submitBtn").click(function (event) {
         event.preventDefault();
         if ($("#addNewAddress").val().length == 0) {
@@ -134,9 +76,7 @@ $(document).ready(function () {
             $("#validation > p").text("Passwords must match.")
         } else {
             $("#addNewItemModal").css("display", "none"); //close pop-up
-            $("#noItems").css("display", "none"); //don't show no item message
-            $("#storedWebsites").css("display", "table"); //show table
-
+            
             rootRef.once("value").then(function (snapshot) {
                 numOfItems = snapshot.child("users/" + userid + "/numsites").val();
             });
@@ -147,18 +87,8 @@ $(document).ready(function () {
             
             let websiteNum = "website" + numOfItems;
             let NewNumOfItems = numOfItems + 1;
-            /*
-            firebase.database().ref('users/' + userid + '/websites').set({
-                websiteNum: {
-                "address": addedAddress,
-                "userName": userName,
-                "password": password
-                }
-            });
-            */
             
             firebase.database().ref('users/' + userid + '/websites/' + websiteNum).set({
-                //"arrayValue": numOfItems,
                 "address": addedAddress,
                 "userName": userName,
                 "password": password
@@ -175,41 +105,9 @@ $(document).ready(function () {
             $("#addNewPwd").val("");
             $("#addNewConfirm").val("");
             $("#validation > p").text("");
-
-            //appending new table row
-            let tr = $("<tr></tr>");
-            $("tbody").append(tr);
-
-            //first td: website address
-            let td1 = $("<td></td>");
-            td1.addClass("address");
-            td1.text(addedAddress);
-
-            //second td: strength bar
-            let td2 = $("<td></td>");
-            td2.addClass("strength");
-            td2.text("Strength ");
-            let barImage = $("<img>");
-            barImage.attr("src", "https://dummyimage.com/100x10/000/fff&text=+");
-            td2.append(barImage);
-
-            //third td: remove icon
-            let td3 = $("<td></td>");
-            td3.addClass("removeIcon");
-            let removeIcon = $("<i></i>");
-            removeIcon.addClass("fas fa-trash-alt");
-            td3.append(removeIcon);
-
-            tr.append(td1, td2, td3);
-
-            //add event listener on remove icon
-            removeIcon.click(function () {
-                let item = $(this).parent().parent().children("td.address").text();
-                if (confirm("Would you like to remove the stored password for \"" + item + "\"?")) {
-                    $(this).parent().parent().remove();
-                    checkItems(); //check if all removed
-                }
-            });
+            
+            //append row to table
+            appendRow(addedAddress, websiteNum);
         }
     });
 
@@ -241,8 +139,53 @@ $(document).ready(function () {
           });
         //alert("Not ready yet.");
     });
-
-
     
+    
+    
+    //appending new table row
+    function appendRow (str1, str2) {
+        $("#noItems").css("display", "none"); //don't show no item message
+        $("#storedWebsites").css("display", "table"); //show table
+        let address = str1;
+        let rowID = str2;
+        
+        let tr = $("<tr></tr>");
+        tr.attr("id", rowID);
+        $("tbody").append(tr);
+
+        //first td: website address
+        let td1 = $("<td></td>");
+        td1.addClass("address");
+        td1.text(address);
+
+        //second td: strength bar
+        let td2 = $("<td></td>");
+        td2.addClass("strength");
+        td2.text("Strength ");
+        let barImage = $("<img>");
+        barImage.attr("src", "https://dummyimage.com/100x10/000/fff&text=+");
+        td2.append(barImage);
+
+        //third td: remove icon
+        let td3 = $("<td></td>");
+        td3.addClass("removeIcon");
+        let removeIcon = $("<i></i>");
+        removeIcon.addClass("fas fa-trash-alt");
+        td3.append(removeIcon);
+
+        tr.append(td1, td2, td3);
+
+        //add event listener on remove icon
+        removeIcon.click(function () {
+            let item = $(this).parent().parent().children("td.address").text();
+            if (confirm("Would you like to remove the stored password for \"" + item + "\"?")) {
+                
+                firebase.database().ref("users/" + userid + "/websites/" + rowID).remove();
+                
+                $(this).parent().parent().remove();
+                checkItems(); //check if all removed
+            }
+        });
+    }
     
 });
