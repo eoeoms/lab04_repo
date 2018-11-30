@@ -5,17 +5,22 @@ $(document).ready(function () {
     var rootRef = firebase.database().ref();
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-          userid = user.uid;
-        } else {
-  
+            userid = user.uid;
         }
-      });
+    });
 
     
     //reading values from database
     rootRef.once("value").then(function (snapshot) {
         
-        numOfItems = snapshot.child("users/" + userid + "/numsites").val();
+        if (snapshot.child("users/" + userid).hasChild("numsites")) {
+            numOfItems = snapshot.child("users/" + userid + "/numsites").val();
+        } else {
+            firebase.database().ref('users/' + userid).update({
+                "numsites": 0
+            });
+            numOfItems = 0;
+        }
         
         //builds table off of database
         if (snapshot.child("users/" + userid).hasChild("websites")) {
