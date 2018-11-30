@@ -3,6 +3,9 @@ $(document).ready(function () {
     var userid;
     var numOfItems;
     var rootRef = firebase.database().ref();
+    var passwordAr = [];
+    var uniquePwdAr = [];
+    var freqAr = [];
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             userid = user.uid;
@@ -10,7 +13,7 @@ $(document).ready(function () {
     });
 
     
-    //reading values from database
+    //reading values from database every time website loads
     rootRef.once("value").then(function (snapshot) {
         
         if (snapshot.child("users/" + userid).hasChild("numsites")) {
@@ -31,8 +34,22 @@ $(document).ready(function () {
                 snapshot.forEach(function(childSnapshot) {
                     var address = childSnapshot.child("address").val();
                     var rowID = childSnapshot.key;
-                    appendRow(address, rowID);
+                    var password = childSnapshot.child("password").val();
+                    appendRow(address, rowID, password);
+                    passwordAr.push(password);
                 });
+                passwordAr.sort();
+                let prev;
+                for( let i = 0; i < passwordAr.length; i++){
+                    if (passwordAr[i] !== prev) {
+                        uniquePwdAr.push(passwordAr[i]);
+                        freqAr.push(1);
+                    } else {
+                        freqAr[freqAr.length-1]++;
+                    }
+                    prev = passwordAr[i];
+                }
+                constructDetails();
                 
             });
         }
@@ -79,7 +96,8 @@ $(document).ready(function () {
             $("#validation > p").text("Website address should be longer.")
         } else if ($("#addNewPwd").val() == "" || $("#addNewPwd").val() != $("#addNewConfirm").val()) {
             $("#validation > p").text("Passwords must match.")
-        } else {
+        } else {    //validation approved
+            
             $("#addNewItemModal").css("display", "none"); //close pop-up
             
             rootRef.once("value").then(function (snapshot) {
@@ -104,6 +122,9 @@ $(document).ready(function () {
                 "numsites": NewNumOfItems
             });
 
+            location.reload();
+            /*
+            this is now unnecessary since page reloads once you've pressed submit
             //clear fields
             $("#addNewAddress").val("");
             $("#addNewUsername").val("");
@@ -112,11 +133,12 @@ $(document).ready(function () {
             $("#validation > p").text("");
             
             //append row to table
-            appendRow(addedAddress, websiteNum);
+            appendRow(addedAddress, websiteNum, password);
+            */
         }
     });
 
-    //DETAILS
+    //EXPAND AND COLLAPSE DETAILS
     $("#detailsBar").click(function () {
         if ($("#detailsBar").css("bottom") == "-2px") {
             $("#detailsBar").animate({
@@ -142,17 +164,19 @@ $(document).ready(function () {
           }).catch(function(error) {
             // An error happened.
           });
-        //alert("Not ready yet.");
     });
     
     
     
     //appending new table row
-    function appendRow (str1, str2) {
+    function appendRow (str1, str2, str3) {
         $("#noItems").css("display", "none"); //don't show no item message
         $("#storedWebsites").css("display", "table"); //show table
         let address = str1;
         let rowID = str2;
+        let password = str3;
+        let path = "";
+        let strengthString = "";
         
         let tr = $("<tr></tr>");
         tr.attr("id", rowID);
@@ -166,31 +190,71 @@ $(document).ready(function () {
         //second td: strength bar
         let td2 = $("<td></td>");
         td2.addClass("strength");
-        td2.text("Strength ");
+        td2.text("Strength: ");
         let barImage = $("<img>");
-        barImage.attr("src", "https://dummyimage.com/100x10/000/fff&text=+");
+        if (password.length < 8) {
+            path = "./Images/Red.png"
+        } else if (password.length == 8) {
+            path = "./Images/Yellow.png"
+        } else {
+            path = "./Images/Green.jpg"
+        }
+        barImage.attr("src", path);
         td2.append(barImage);
 
-        //third td: remove icon
+        //third td: strength in words
         let td3 = $("<td></td>");
-        td3.addClass("removeIcon");
+        td3.addClass("strengthString");
+        if (password.length < 8) {
+            strengthString = "Weak"
+        } else if (password.length == 8) {
+            strengthString = "Moderate"
+        } else {
+            strengthString = "Strong"
+        }
+        td3.text(strengthString);
+        
+        //fourth td: remove icon
+        let td4 = $("<td></td>");
+        td4.addClass("removeIcon");
         let removeIcon = $("<i></i>");
         removeIcon.addClass("fas fa-trash-alt");
-        td3.append(removeIcon);
+        td4.append(removeIcon);
 
-        tr.append(td1, td2, td3);
+        tr.append(td1, td2, td3, td4);
 
         //add event listener on remove icon
         removeIcon.click(function () {
             let item = $(this).parent().parent().children("td.address").text();
             if (confirm("Would you like to remove the stored password for \"" + item + "\"?")) {
                 
+                //remove from database
                 firebase.database().ref("users/" + userid + "/websites/" + rowID).remove();
                 
+                location.reload();
+                /* 
+                this is now unnecessary since page reloads when you remove something
                 $(this).parent().parent().remove();
                 checkItems(); //check if all removed
+                */
             }
         });
     }
-    
+    var detailsText = "";
+    function constructDetails() {
+        freqAr.forEach(checkPwdFreq);
+        if (detailsText == "") {
+            detailsText = "<p>All passwords are unique. Good job!</p>"
+        }
+        let text = $("<div></div>");
+        text.html(detailsText);
+        $("#detailsPanel").append(text);
+    }
+    //check passwords
+    function checkPwdFreq(value, index, array) {
+        let frequency = value;
+        if (frequency > 1) {
+            detailsText += "<p>Password \"" + uniquePwdAr[index] + "\" is used for " + value + " different websites.</p>"
+        }
+    }
 });
