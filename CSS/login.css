@@ -3,6 +3,7 @@
             src: url('../Fonts/CaviarDreams_Bold.ttf')
         }
 
+        /*BODY*/
         body {
             background: rgba(4, 40, 68, 0.85);
             width: 100%;
@@ -12,14 +13,16 @@
             margin: 0;
         }
 
+        /*HEADER "SAFESTORE"*/
         h1 {
             text-align: center;
             font-size: 50pt;
         }
-		
-		a {
-			color: white
-		}	
+
+        /**/
+        a {
+            color: white
+        }
 
         /*
 

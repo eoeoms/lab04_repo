@@ -6,14 +6,19 @@
 
     <title> SafeStore </title>
 
+    <!--JQUERY AND FIREBASE SCRIPTS-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
 
+    <!--FIREBASE SHEET-->
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+    
+    <!--LOGIN PAGE CSS-->
     <link type="text/css" rel="stylesheet" href="CSS/login.css" />
+
+    <!--INITIALIZES FIREBASE-->
     <script>
-        // Initialize Firebase
         var config = {
             apiKey: "AIzaSyBIjtMzt9U8DuqFWbyN0E5aLAC-5bLaq_U",
             authDomain: "nov01-bbe3f.firebaseapp.com",
@@ -25,56 +30,37 @@
         firebase.initializeApp(config);
     </script>
 
-    
+
 </head>
 
 <body>
-
+    <!--TITLE/BANNER-->
     <h1 id="banner"> <u>SafeStore</u> </h1>
 
-    <!-- <script src="greeting.js"></script> -->
-    <!-- <script src="setup_firebase.js"></script> -->
-
-    
+    <!--LOGIN CONTAINER-->
     <h1 id="firebaseui-auth-container"></h1>
-    
+
 
 
     <script>
-        // Initialize the FirebaseUI Widget using Firebase.
+        // FIREBASE BUILT IN LOGIN UI
         var ui = new firebaseui.auth.AuthUI(firebase.auth());
         var uiConfig = {
             callbacks: {
                 signInSuccessWithAuthResult: function (authResult, redirectUrl) {
 
-                    /**
-                    var userName = $('[name="name"]').val();
-                    if (typeof userName != typeof undefined){
-                        var email = $('[name="email"]').val();
-                        var userUid = firebase.auth().currentUse.uid;
-                        console.log("input:\nemail: " + email + '\nusername' + userName + '\nuid: ' + userID);
-                        writeUserData(userUid, userName, email);
-                    }**/
-
-                    
-                    // User successfully signed in.
-                    // Return type determines whether we continue the redirect automatically
-                    // or whether we leave that to developer to handle.
                     return true;
+
                 },
                 uiShown: function () {
-                    // The widget is rendered.
-                    // Hide the loader.
-                  //  document.getElementById('loader').style.display = 'none';
                 }
             },
             // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
             signInFlow: 'popup',
             signInSuccessUrl: 'dashboard.html',
             signInOptions: [
-                // Leave the lines as is for the providers you want to offer your users.
+                // Email authentication
                 firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                //firebase.auth.PhoneAuthProvider.PROVIDER_ID
             ],
             // Terms of service url.
             tosUrl: 'underconstruction.html',
@@ -82,32 +68,19 @@
             privacyPolicyUrl: 'underconstruction.html'
         };
 
-        // The start method will wait until the DOM is loaded.
-        // Inject the login interface into the HTML
+        // INJECTS FIREBASE PREBUILT LOGIN UI INTO PAGE
         ui.start('#firebaseui-auth-container', uiConfig);
 
+        //Creates user node in database
+        (function () {
 
-		
-		
-		
-		
-		
-		
-		(function(){
-
-    // for the currently authenticated firebase user
-    // create your own "user" node in the datebase using 
-    // the firebase generated "uid"
-
-			firebase.auth().onAuthStateChanged(function(user){
-				firebase.database().ref("users/"+user.uid).update(
-				{
-					// "name":user.displayName,
-					"email":user.email/*,
-					"numsites":0*/
-				});
-			});
-			})()
+            firebase.auth().onAuthStateChanged(function (user) {
+                firebase.database().ref("users/" + user.uid).update({
+                    "email": user.email
+                });
+            });
+            
+        })()
     </script>
 
 </body>

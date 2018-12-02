@@ -1,21 +1,34 @@
 $(document).ready(function () {
 
+    //USER's ID
     var userid;
+
+    //NUMBER OF WEBSITES
     var numOfItems;
+
+    //REFERENCE TO FIREBASE DATABASE
     var rootRef = firebase.database().ref();
+    
+    //ARRAY OF PASSWORDS
     var passwordAr = [];
+    
+    //ARRAY OF UNIQUE PASSWORDS
     var uniquePwdAr = [];
+    
+    //ARRAY OF THE FREQUENCY OF UNIQUE PASSWORDS
     var freqAr = [];
+
+    //TAKES USER ID FROM FIREBASE AUTHENTICATION
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             userid = user.uid;
         }
     });
 
-    
-    //reading values from database every time website loads
+
+    //READS VALUES FROM FIREBASE EVERYTIME PAGE LOADS
     rootRef.once("value").then(function (snapshot) {
-        
+
         if (snapshot.child("users/" + userid).hasChild("numsites")) {
             numOfItems = snapshot.child("users/" + userid + "/numsites").val();
         } else {
@@ -24,14 +37,15 @@ $(document).ready(function () {
             });
             numOfItems = 0;
         }
-        
-        //builds table off of database
+
+        //BUILDS TABLE/WEBSITE LIST OFF OF FIREBASE INFORMATION
         if (snapshot.child("users/" + userid).hasChild("websites")) {
-            
+
+            //REFERENCE TO NODE
             var query = firebase.database().ref("users/" + userid + "/websites").orderByKey();
-            query.once("value").then(function(snapshot) {
-                
-                snapshot.forEach(function(childSnapshot) {
+            query.once("value").then(function (snapshot) {
+
+                snapshot.forEach(function (childSnapshot) {
                     var address = childSnapshot.child("address").val();
                     var rowID = childSnapshot.key;
                     var password = childSnapshot.child("password").val();
@@ -40,21 +54,21 @@ $(document).ready(function () {
                 });
                 passwordAr.sort();
                 let prev;
-                for( let i = 0; i < passwordAr.length; i++){
+                for (let i = 0; i < passwordAr.length; i++) {
                     if (passwordAr[i] !== prev) {
                         uniquePwdAr.push(passwordAr[i]);
                         freqAr.push(1);
                     } else {
-                        freqAr[freqAr.length-1]++;
+                        freqAr[freqAr.length - 1]++;
                     }
                     prev = passwordAr[i];
                 }
                 constructDetails();
-                
+
             });
         }
     });
-    
+
 
     //IF NO STORED PASSWORDS, DISPLAY MESSAGE
     checkItems();
@@ -72,12 +86,12 @@ $(document).ready(function () {
         $("#addNewAddress").focus(); //focuses on first input field
     });
 
-    //triggers submit button when Enter key is pressed inside any input fields
+    //SUBMIT BUTTON WORKS WITH ENTER KEY
     $("#addNewItemForm input").keyup(function (event) {
         if (event.which === 13) {
             document.getElementById("submitBtn").click();
         }
-        //close pop-up if esc pressed
+        //CLOSE POP UP IF ESC IS PRESSED
         if (event.which === 27) {
             $("#addNewItemModal").css("display", "none");
         }
@@ -96,28 +110,36 @@ $(document).ready(function () {
             $("#validation > p").text("Website address should be longer.")
         } else if ($("#addNewPwd").val() == "" || $("#addNewPwd").val() != $("#addNewConfirm").val()) {
             $("#validation > p").text("Passwords must match.")
-        } else {    //validation approved
-            
-            $("#addNewItemModal").css("display", "none"); //close pop-up
-            
+        } else { //validation approved
+
+            //CLOSE POP UP
+            $("#addNewItemModal").css("display", "none");
+
             rootRef.once("value").then(function (snapshot) {
                 numOfItems = snapshot.child("users/" + userid + "/numsites").val();
             });
-            
-            let addedAddress = $("#addNewAddress").val(); //get added address
+
+            //GETS ADDED ADDRESS
+            let addedAddress = $("#addNewAddress").val();
+            //GETS ADDED USER NAME
             let userName = $("#addNewUsername").val();
+            //GETS ADDED PASSWORD
             let password = $("#addNewPwd").val();
-            
+
+            //LABELS THE INDEX OF THE WEBSITE
             let websiteNum = "website" + numOfItems;
+            //NUMBER OF ITEMS
             let NewNumOfItems = numOfItems + 1;
-            
+
+            //BUILDS DATABASE NODES
             firebase.database().ref('users/' + userid + '/websites/' + websiteNum).set({
                 "address": addedAddress,
                 "userName": userName,
                 "password": password
-                
+
             });
-            
+
+            //UPDATES NUMBER OF SITES NODE
             firebase.database().ref('users/' + userid).update({
                 "numsites": NewNumOfItems
             });
@@ -159,35 +181,38 @@ $(document).ready(function () {
 
     //LOG OUT
     $("#logOut").click(function () {
-        firebase.auth().signOut().then(function() {
+        firebase.auth().signOut().then(function () {
             window.location.href = "./safestoreV2.html";
-          }).catch(function(error) {
+        }).catch(function (error) {
             // An error happened.
-          });
+        });
     });
-    
-    
-    
-    //appending new table row
-    function appendRow (str1, str2, str3) {
-        $("#noItems").css("display", "none"); //don't show no item message
-        $("#storedWebsites").css("display", "table"); //show table
+
+
+
+    //APPENDS NEW TABLE ROW
+    function appendRow(str1, str2, str3) {
+
+        //SHOWS NO ITEMS AVAILABLE MESSAGE
+        $("#noItems").css("display", "none"); 
+        //SHOWS TABLE
+        $("#storedWebsites").css("display", "table");
         let address = str1;
         let rowID = str2;
         let password = str3;
         let path = "";
         let strengthString = "";
-        
+
         let tr = $("<tr></tr>");
         tr.attr("id", rowID);
         $("tbody").append(tr);
 
-        //first td: website address
+        //FIRST TD: WEBSITE ADDRESS
         let td1 = $("<td></td>");
         td1.addClass("address");
         td1.text(address);
 
-        //second td: strength bar
+        //SECOND TD: STRENGTH BAR (ICON)
         let td2 = $("<td></td>");
         td2.addClass("strength");
         td2.text("Strength: ");
@@ -202,7 +227,7 @@ $(document).ready(function () {
         barImage.attr("src", path);
         td2.append(barImage);
 
-        //third td: strength in words
+        //THIRD TD: STRENGTH INDICATOR (STRING)
         let td3 = $("<td></td>");
         td3.addClass("strengthString");
         if (password.length < 8) {
@@ -213,8 +238,8 @@ $(document).ready(function () {
             strengthString = "Strong"
         }
         td3.text(strengthString);
-        
-        //fourth td: remove icon
+
+        //FOURTH TD: REMOVE WEBSITE ICON
         let td4 = $("<td></td>");
         td4.addClass("removeIcon");
         let removeIcon = $("<i></i>");
@@ -223,14 +248,14 @@ $(document).ready(function () {
 
         tr.append(td1, td2, td3, td4);
 
-        //add event listener on remove icon
+        //REMOVE ICON EVENT LISTENER
         removeIcon.click(function () {
             let item = $(this).parent().parent().children("td.address").text();
             if (confirm("Would you like to remove the stored password for \"" + item + "\"?")) {
-                
+
                 //remove from database
                 firebase.database().ref("users/" + userid + "/websites/" + rowID).remove();
-                
+
                 location.reload();
                 /* 
                 this is now unnecessary since page reloads when you remove something
@@ -241,6 +266,8 @@ $(document).ready(function () {
         });
     }
     var detailsText = "";
+
+    //TELLS THEM DETAILS OF PASSWORDS
     function constructDetails() {
         freqAr.forEach(checkPwdFreq);
         if (detailsText == "") {
@@ -250,7 +277,8 @@ $(document).ready(function () {
         text.html(detailsText);
         $("#detailsPanel").append(text);
     }
-    //check passwords
+
+    //CHECKS PASSWORDS
     function checkPwdFreq(value, index, array) {
         let frequency = value;
         if (frequency > 1) {
