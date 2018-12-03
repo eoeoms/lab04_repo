@@ -1,30 +1,82 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <title> Persona 3 </title>
+    <title>Persona #3</title>
+	<style>
+      #wrapper {
+        margin: 0 auto;
+        width: 1000px;
+      }
+      #main {
+        float: left;
+        width: 300px;
+      }
+      img {
+        margin: 0 auto;
+        display: block;
+        padding-top: 40px;
+      }
+      h1 {
+        text-align: center;
+      }
+      p {
+        text-align: center;
+      }
+      #aside {
+        float: left;
+        width: 600px;
+        padding-left: 100px;
+      }
+      header {
+	      background-color: white;
+        text-align: center;
+        padding: 10px;
+        border-bottom: 2px solid black;
+      }
+      header a {
+        display: inline-block;
+        text-decoration: none;
+        background-color: white;
+        color: black;
+        border: 2px solid green;
+        padding: 10px 20px;
+        width: 60px;
+        margin: 0 10px;
+        font-family: sans-serif;
+      }
+      header a:hover, header a:active {
+        background-color: green;
+        color: white;
+      }
+    </style>
   </head>
-  
   <body>
-    <h1> Carter Westwood </h1>
-	<img src="https://media.licdn.com/dms/image/C5603AQEuDyVr6jgwHw/profile-displayphoto-shrink_200_200/0?e=1544659200&v=beta&t=oOM_LCNldOpNNNj5hiv60pXijohS6l4Qvbu5h7qBR5s" alt="Carter">
-	<p>
-	  Carter Westwood is a 25 year old investment banker at the TD building.
-	  He works long days (9 am - 10 pm) Monday to Friday. 
-	  <br>
-	  <br>
-	  He walks/transits to work and lives a fast paced life as he's, 
-	  "here for a good time, not a long time". Also, he's always looking to 
-	  make the big score and impress his bosses in order to get
-	  that big bonus. At work, he's always interacting with multiple 
-	  accounts and devices while managing a lot of work related applications.
-	  <br>
-	  <br>
-	  When he has time, he's playing hockey, attending the next big
-	  rave or out partying with friends. Because of this, he also uses
-	  a lot of social media platforms to keep in touch with people. At the same time,
-	  he uses social media to see trends on the market.
-	</p>
+    <header>
+	  <a href="index.html">Home</a>
+	</header>
+	<br/>
+	<div id="wrapper">
+	  <div id="main">
+	    <img src="https://media.licdn.com/dms/image/C5603AQEuDyVr6jgwHw/profile-displayphoto-shrink_200_200/0?e=1544659200&v=beta&t=oOM_LCNldOpNNNj5hiv60pXijohS6l4Qvbu5h7qBR5s">
+	    <h1>Carter Westwood</h1>
+	    <p>Investment Banker</p>
+		<p>25 years old</p>
+	  </div>
+	  <div id="aside">
+	    <h2>About:</h2>
+	    <ul>
+          <li>Works at TD building downtown</li>
+		  <li>Works long days (9am - 10pm) Monday to Friday</li>
+		  <li>Walks and transits to work</li>
+		  <li>Fast-paced</li>
+	    </ul>
+	    <h2>Touchpoints:</h2>
+	    <ul>
+	      <li>Owns lots of accounts for his social media platforms</li>
+		  <li>Needs to stay up to dat with both his friends and his work</li>
+		  <li>Watches stock market trends on all his devices all the time</li>
+	    </ul>
+	  </div>
+    </div>
   </body>
-  
 </html>
