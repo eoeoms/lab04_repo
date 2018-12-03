@@ -3,8 +3,8 @@ $(document).ready(function () {
     //USER's ID
     var userid;
 
-    //NUMBER OF WEBSITES
-    var numOfItems;
+    //WEBSITES INDEX
+    var siteNum;
 
     //REFERENCE TO FIREBASE DATABASE
     var rootRef = firebase.database().ref();
@@ -29,13 +29,13 @@ $(document).ready(function () {
     //READS VALUES FROM FIREBASE EVERYTIME PAGE LOADS
     rootRef.once("value").then(function (snapshot) {
 
-        if (snapshot.child("users/" + userid).hasChild("numsites")) {
-            numOfItems = snapshot.child("users/" + userid + "/numsites").val();
+        if (snapshot.child("users/" + userid).hasChild("sitenum")) {
+            siteNum = snapshot.child("users/" + userid + "/sitenum").val();
         } else {
             firebase.database().ref('users/' + userid).update({
-                "numsites": 0
+                "sitenum": 0
             });
-            numOfItems = 0;
+            siteNum = 0;
         }
 
         //BUILDS TABLE/WEBSITE LIST OFF OF FIREBASE INFORMATION
@@ -49,9 +49,17 @@ $(document).ready(function () {
                     var address = childSnapshot.child("address").val();
                     var rowID = childSnapshot.key;
                     var password = childSnapshot.child("password").val();
+                    
+                    //CREATES AND APPENDS A TABLE ROW TO THE HTML FOR EACH NODE UNDER WEBSITES(line 45)
                     appendRow(address, rowID, password);
+                    //ALL THE PASSWORDS ARE STORED INTO AN ARRAY
                     passwordAr.push(password);
                 });
+                
+                //CREATES AN ARRAY FOR ONLY UNIQUE PASSWORDS(NO DUPLICATES), AND ANOTHER ARRAY FOR FREQUENCY
+                //EACH ITEM IN THE FREQUENCY ARRAY REPRESENTS THE FREQUENCY OF THE CORRESPONDING
+                //PASSWORD FROM THE UNIQUE PASSWORD ARRAY WITH THE SAME INDEX
+                //(e.g. THIRD ITEM IN freqAr IS THE FREQUENCY FOR THE THIRD ITEM IN uniquePwdAr)
                 passwordAr.sort();
                 let prev;
                 for (let i = 0; i < passwordAr.length; i++) {
@@ -63,47 +71,14 @@ $(document).ready(function () {
                     }
                     prev = passwordAr[i];
                 }
+                //EDITS HTML FOR THE DETAILS PANNEL
                 constructDetails();
 
             });
         }
     });
 
-
-    //IF NO STORED PASSWORDS, DISPLAY MESSAGE
-    checkItems();
-
-    function checkItems() {
-        if (!document.getElementById("tbody").hasChildNodes()) {
-            $("#storedWebsites").css("display", "none");
-            $("#noItems").css("display", "block");
-        }
-    }
-
-    //ADD NEW PASSWORD POP-UP
-    $("#addNewIcon").click(function () {
-        $("#addNewItemModal").css("display", "block");
-        $("#addNewAddress").focus(); //focuses on first input field
-    });
-
-    //SUBMIT BUTTON WORKS WITH ENTER KEY
-    $("#addNewItemForm input").keyup(function (event) {
-        if (event.which === 13) {
-            document.getElementById("submitBtn").click();
-        }
-        //CLOSE POP UP IF ESC IS PRESSED
-        if (event.which === 27) {
-            $("#addNewItemModal").css("display", "none");
-        }
-    });
-
-    //CLOSE ADD MENU
-    $("#closeBtn").click(function () {
-        $("#addNewItemModal").css("display", "none");
-    });
-
     //SUBMIT BUTTON ON ADD MENU
-    //to add lots of table rows fast, comment out line 76 to 80, and line 114
     $("#submitBtn").click(function (event) {
         event.preventDefault();
         if ($("#addNewAddress").val().length == 0) {
@@ -115,10 +90,6 @@ $(document).ready(function () {
             //CLOSE POP UP
             $("#addNewItemModal").css("display", "none");
 
-            rootRef.once("value").then(function (snapshot) {
-                numOfItems = snapshot.child("users/" + userid + "/numsites").val();
-            });
-
             //GETS ADDED ADDRESS
             let addedAddress = $("#addNewAddress").val();
             //GETS ADDED USER NAME
@@ -127,9 +98,9 @@ $(document).ready(function () {
             let password = $("#addNewPwd").val();
 
             //LABELS THE INDEX OF THE WEBSITE
-            let websiteNum = "website" + numOfItems;
+            let websiteNum = "website" + siteNum;
             //NUMBER OF ITEMS
-            let NewNumOfItems = numOfItems + 1;
+            let incrementedSiteNum = siteNum + 1;
 
             //BUILDS DATABASE NODES
             firebase.database().ref('users/' + userid + '/websites/' + websiteNum).set({
@@ -141,41 +112,10 @@ $(document).ready(function () {
 
             //UPDATES NUMBER OF SITES NODE
             firebase.database().ref('users/' + userid).update({
-                "numsites": NewNumOfItems
+                "sitenum": incrementedSiteNum
             });
 
             location.reload();
-            /*
-            this is now unnecessary since page reloads once you've pressed submit
-            //clear fields
-            $("#addNewAddress").val("");
-            $("#addNewUsername").val("");
-            $("#addNewPwd").val("");
-            $("#addNewConfirm").val("");
-            $("#validation > p").text("");
-            
-            //append row to table
-            appendRow(addedAddress, websiteNum, password);
-            */
-        }
-    });
-
-    //EXPAND AND COLLAPSE DETAILS
-    $("#detailsBar").click(function () {
-        if ($("#detailsBar").css("bottom") == "-2px") {
-            $("#detailsBar").animate({
-                bottom: "298px"
-            }, 300);
-            $("#detailsPanel").slideDown(300, function () {
-                $("#detailsBar i").attr("class", "fas fa-angle-down");
-            });
-        } else if ($("#detailsBar").css("bottom") == "298px") {
-            $("#detailsBar").animate({
-                bottom: "-2px"
-            }, 300);
-            $("#detailsPanel").slideUp(300, function () {
-                $("#detailsBar i").attr("class", "fas fa-angle-up");
-            });
         }
     });
 
@@ -188,15 +128,16 @@ $(document).ready(function () {
         });
     });
 
-
-
+    
+    
     //APPENDS NEW TABLE ROW
     function appendRow(str1, str2, str3) {
 
-        //SHOWS NO ITEMS AVAILABLE MESSAGE
+        //MAKES NO ITEMS AVAILABLE MESSAGE DISAPPEAR
         $("#noItems").css("display", "none"); 
         //SHOWS TABLE
         $("#storedWebsites").css("display", "table");
+        
         let address = str1;
         let rowID = str2;
         let password = str3;
@@ -257,17 +198,13 @@ $(document).ready(function () {
                 firebase.database().ref("users/" + userid + "/websites/" + rowID).remove();
 
                 location.reload();
-                /* 
-                this is now unnecessary since page reloads when you remove something
-                $(this).parent().parent().remove();
-                checkItems(); //check if all removed
-                */
             }
         });
     }
+    
     var detailsText = "";
 
-    //TELLS THEM DETAILS OF PASSWORDS
+    //TELLS USER THE DETAILS OF PASSWORDS
     function constructDetails() {
         freqAr.forEach(checkPwdFreq);
         if (detailsText == "") {
@@ -278,11 +215,13 @@ $(document).ready(function () {
         $("#detailsPanel").append(text);
     }
 
-    //CHECKS PASSWORDS
+    //CHECKS FREQUENCY OF PASSWORDS
     function checkPwdFreq(value, index, array) {
         let frequency = value;
         if (frequency > 1) {
             detailsText += "<p>Password \"" + uniquePwdAr[index] + "\" is used for " + value + " different websites.</p>"
         }
     }
+    
+    
 });

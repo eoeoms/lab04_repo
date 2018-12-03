@@ -6,15 +6,13 @@
   <title>SafeStore</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="CSS/dashboard.css">
+  
   <!--Firebase DataBase-->
   <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-
   <script>
     // Initialize Firebase
       var config = {
@@ -71,61 +69,9 @@
     </div>
   </div>
 
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="JS/functionality.js"></script>
-
-
-
-
-  <script>
-    //FIREBASE??
-    // Get a reference to the database service
-    var database = firebase.database();
-    var ref = database.ref();
-
-
-
-
-
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        let userid = user.uid;
-        console.log(userid);
-      } else {
-
-      }
-    });
-
-/*
-
-    //Writes user data to the firebase.
-    function writeUserData(website, userName, password) {
-      //Get's user input.
-      console.log(website);
-
-      firebase.database().ref('users/' + user.uid).set({
-        "website": website,
-        "userName": userName,
-        "password": password
-
-      });
-    }
-
-
-    //submit button
-    var submit = document.getElementById("submitBtn");
-
-    //On click, write user data.
-    submit.click(
-          //Get's user input.
-    let userName = document.getElementById("addNewAddress").value;
-    let website = document.getElementById("addNewUsername").value;
-    let password = document.getElementById("addNewPwd").value;
-    writeUserData(website, userName, password)
-    );
-    */
-  </script>
+  <script src="JS/dashboard.js"></script>
+  <script src="JS/firebase.js"></script>
 </body>
 
 </html>
